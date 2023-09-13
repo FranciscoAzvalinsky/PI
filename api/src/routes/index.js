@@ -14,6 +14,7 @@ const getTemperaments = require ('../controllers/getTemperaments')
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+
 router.get('/dogs', getRaces)
 router.get('/dogs/name?', getRaceByName)
 router.get('/dogs/:idRaza', getRaceById)

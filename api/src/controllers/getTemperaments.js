@@ -1,17 +1,15 @@
 const axios = require('axios');
 const URL = 'https://api.thedogapi.com/v1/breeds'
-//search?q='
 const { API_KEY } = process.env;
-const { Dog } = require('../db')
+const { Temperaments } = require('../db')
 const stringToArray = require('./stringToArray');
-const orderArray = require('./orderArray');
+//const orderArray = require('./orderArray');
 
 
 const getTemperaments = async (req, res) => {
     try {
         let everything = [];
         everything = await axios(`${URL}?api_key=${API_KEY}`)
-        //console.log(everything.data);
         let temperaments = [];
         everything.data.forEach(race => {
             if (race.temperament) {
@@ -23,10 +21,12 @@ const getTemperaments = async (req, res) => {
                 })
             }
         });
-        temperaments=orderArray(temperaments);
+        //temperaments=orderArray(temperaments);
+        temperaments.forEach((temper) => {
+            Temperaments.findOrCreate({where: {nombre: temper}});
+        })
         res.status(200).json(temperaments);
     } catch (error) {
-        console.log(error);
         res.status(500).json('Error: ' + error.message)
     }
 }

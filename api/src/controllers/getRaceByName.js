@@ -1,5 +1,6 @@
 const axios = require('axios');
 const URL = 'https://api.thedogapi.com/v1/breeds/search?q='
+const URL_2 = 'https://cdn2.thedogapi.com/images';
 const { API_KEY } = process.env;
 const { Dog } = require('../db')
 const { Op } = require('sequelize');
@@ -18,10 +19,10 @@ const getRaceByName = async (req, res) => {
         if (response2.data) {
             res.status(201).json(response2.data);
         } else {
-            let response = await axios(`${URL}${name}`)
-            if (response) {
-                console.log(response);
-                res.status(200).json(response.data);
+            let { data } = await axios(`${URL}${name}`)
+            if ( data ) {
+                data.reference_image_id = `${URL_2}/${data.reference_image_id}.jpg`
+                res.status(200).json(data);
             }
             else {
                 res.status(403).json('No se ha encontrado ninguna raza con ese nombre')
