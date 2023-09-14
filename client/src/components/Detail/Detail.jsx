@@ -22,22 +22,20 @@ export default function Detail (){
               return setCharacter({});
            }, [id]);
 
-    return (
-        <div className={style.divDetail}>
-             {character.name &&
-            <div className={style.divDiv}>
-                <Link to ='/home'>
-                    <button type='button'>Back</button>
-                </Link>
-                <img src={character.reference_image_id}></img>
-                <p className={style.text}>{character.id}</p>
-                <p className={style.text}>{character.name}</p>
-                <p className={style.text}>{character.weight.metric}</p>
-                <p className={style.text}>{character.height.metric}</p>
-                <p className={style.text}>{character.temperament}</p>
-                <p className={style.text}>{character.life_span}</p>
-            </div>
-            }
-        </div>
-    )
+           if (character.name){
+            return (
+                <div className={style.divDetail}>
+                    <Link to ='/home'>
+                        <button type='button'>Back</button>
+                    </Link>
+                    <img className={style.img} src={character.reference_image_id}></img>
+                    <p className={style.text}>{character.id}</p>
+                    <p className={style.text}>{character.name}</p>
+                    <p className={style.text}>{character.weight.metric}</p>
+                    <p className={style.text}>{character.height.metric}</p>
+                    <p className={style.text}>{character.temperament}</p>
+                    <p className={style.text}>{character.life_span}</p> 
+                </div>
+            )
+           }
 }

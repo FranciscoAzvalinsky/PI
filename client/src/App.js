@@ -93,13 +93,30 @@ function App() {
   }, [showing])*/
 
 
+  const [dogsName, setDogsName] = useState([]);
+
+
+  const SearchByName = async (name) => {
+    try {
+       const result = await axios(`http://localhost:3001/dogs/name?name=${name}`)
+       if (result.data) {
+        setDogsName(result.data);
+       } else {
+          window.alert("No existe una raza de perro con ese nombre")
+       }
+    } catch(error) {
+       console.log(error)
+       window.alert(error.result)
+    }
+ }
 
   return (
     <div className="App">
-      {location.pathname !== '/' && <Nav /*SearchByName={SearchByName}*//>}
+      {location.pathname !== '/' && <Nav SearchByName={SearchByName}/>}
       <Routes>
         <Route path = '/' element = {<LandingPage/>}/>
-        <Route path = '/home' element = {<Paginador prevHandler={prevHandler} nextHandler={nextHandler} currentPage={currentPage} dogs={showing}/>}/>
+        <Route path = '/home' element = {<Paginador prevHandler={prevHandler} nextHandler={nextHandler} currentPage={currentPage} dogs={showing} home={true}/>}/>
+        <Route path = '/home/name' element = {<Paginador dogs={dogsName} home={false}/>}/>
         <Route path = '/detail/:id' element = {<Detail/>}/>
         <Route path = '/createDog'/>
       </Routes>
@@ -113,19 +130,3 @@ export default App;
 
   
 
-  /*const [dogsName, setDogsName] = useState([]);
-
-
-  const SearchByName = async (name) => {
-    try {
-       const result = await axios(`http://localhost:3001/dogs/name?name=${name}`)
-       if (result.data) {
-          setDogsName([...dogsName, result.data])
-       } else {
-          window.alert("No existe una raza de perro con ese nombre")
-       }
-    } catch(error) {
-       console.log(error)
-       window.alert(error.result)
-    }
- }*/

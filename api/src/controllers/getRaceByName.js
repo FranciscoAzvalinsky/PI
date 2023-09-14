@@ -20,8 +20,15 @@ const getRaceByName = async (req, res) => {
             res.status(201).json(response2.data);
         } else {
             let { data } = await axios(`${URL}${name}`)
-            if ( data ) {
-                data.reference_image_id = `${URL_2}/${data.reference_image_id}.jpg`
+            if (data) {
+                data.forEach( dog => {
+                    if (dog.id === 15 || dog.id === 125 || dog.id === 212) {
+                        extension = 'png';
+                    } else {
+                        extension = 'jpg';
+                    }
+                    dog.reference_image_id = `${URL_2}/${dog.reference_image_id}.${extension}`
+                })
                 res.status(200).json(data);
             }
             else {

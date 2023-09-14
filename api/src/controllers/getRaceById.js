@@ -14,7 +14,13 @@ try {
     else {
         let { data } = await axios(`${URL}${idRaza}?api_key=${API_KEY}`)
         if (data) {
-            data.reference_image_id = `${URL_2}/${data.reference_image_id}.jpg`
+            let extension;
+            if (data.id === 15 || data.id === 125 || data.id === 212) {
+                extension = 'png';
+            } else {
+                extension = 'jpg';
+            }
+            data.reference_image_id = `${URL_2}/${data.reference_image_id}.${extension}`
             res.status(200).send(data);
         }
         else {
