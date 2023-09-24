@@ -27,7 +27,7 @@
 .divSelect{
     display: flex;
     flex-direction: row;
-    margin-left: 55%;
+    margin-left: 50%;
     padding: 30px;
     align-content: space-between;
 }

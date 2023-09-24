@@ -1,37 +1,30 @@
 import './App.css';
 
 import { useState , useEffect} from 'react';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { connect, useDispatch } from "react-redux";
 
 import LandingPage from './components/LandingPage/LandingPage';
 import Nav from './components/Nav/Nav';
 import Paginador from './components/Paginador/Paginador';
 import Detail from './components/Detail/Detail';
-
-
-
+import Form from  './components/Form/Form';
 
 import axios from 'axios';
 
+import { loadDogs, loadNamed, loadTemperaments, loadedDogs } from './redux/actions';
 
-function App() {
+function App({dogs, loadDogs, loadTemperaments, loadedDogs, loadedDogsSwitch, dogsName}) {
 
   let location = useLocation();
-
-  const [dogs, setDogs] = useState([]);  
-  const [showing, setShowing] = useState([]);
-  const [currentPage, setCurrentPage]= useState(0);
-  const [loaded, setLoaded] = useState(false);
-  const itemsPerPage = 8;
-
+  const dispatch = useDispatch();
 
   useEffect (() => {
-    const loadDogs = async () => {
+    const cargarDogs = async () => {
       try {
         const response = await axios('http://localhost:3001/dogs')
         if (response.data){
-          setDogs([response.data]);
-          setLoaded(true);
+          dispatch(loadDogs(response.data));
         } else {
           window.alert('No se han podido cargar los perros');
         }
@@ -39,75 +32,68 @@ function App() {
         console.log(error.message)
       }
     }
-    loadDogs();
+
+    cargarDogs();
+   
+  }, [loadedDogsSwitch])
+
+  useEffect(() => {
+    const cargarTemperaments = async () => {
+      try{
+        const response = await axios('http://localhost:3001/temperaments')
+        if (response.data){
+          dispatch(loadTemperaments(response.data))
+        } else {
+          window.alert('No se han podido cargar los temperamentos');
+        }
+      }
+      catch (e){
+        console.log(e.message)
+      }
+    }
+    cargarTemperaments();
   }, [])
 
-  useEffect (() => {
-    if (loaded){
-      let Dogs = [...dogs][0]
-      const fragment = Dogs.slice(0, 8)
-      setShowing(fragment);
-    }
-  }, [dogs])
-
-  const prevHandler = () => {
-   const antPag = currentPage - 1;
-   const index = antPag * itemsPerPage;
-
-   if (currentPage === 0) return
-
-   let Dogs = [...dogs][0]
-   const fragment = []
-   for (let i = index; i < index+itemsPerPage; i++){
-     fragment.push(Dogs[i]);
-   }
-   setShowing(fragment)
-   setCurrentPage(antPag);
-  }
-
-  const nextHandler = () => {
-    let Dogs = [...dogs][0]
-    const sigtPag = currentPage + 1;
-    const total = Dogs.length;
-    const index = sigtPag * itemsPerPage;
-
-    if (index >= total) return
-    
-    
-    const fragment = []
-    for (let i = index; i < index+itemsPerPage; i++){
-      if (Dogs[i]){
-        fragment.push(Dogs[i]);
-      }
-     
-    }
-    setShowing(fragment)
-    setCurrentPage(sigtPag);
-  }
-
-  /*
-  
-  
-  useEffect (() => {
-    console.log(showing)
-  }, [showing])*/
+  //const [dogsName, setDogsName] = useState([]);
 
 
-  const [dogsName, setDogsName] = useState([]);
-
-
-  const SearchByName = async (name) => {
-    try {
+  const SearchByName = async () => {
+    dispatch(loadNamed())
+    /*try {
        const result = await axios(`http://localhost:3001/dogs/name?name=${name}`)
        if (result.data) {
+        console.log(result.data);
         setDogsName(result.data);
+        console.log(name)
        } else {
           window.alert("No existe una raza de perro con ese nombre")
        }
     } catch(error) {
        console.log(error)
        window.alert(error.result)
-    }
+    }*/
+
+ }
+
+
+ const createDog = async (dogReceived) => {
+  let dogSend = {
+    id: dogs.length+93,
+    name: dogReceived.name,
+    weight: {metric: `${dogReceived.weightMin} - ${dogReceived.weightMax}`},
+    height: {metric: `${dogReceived.heightMin} - ${dogReceived.heightMax}`},
+    life_span: dogReceived.life_span,
+    temperament: dogReceived.temperament,
+    reference_image_id: dogReceived.reference_image_id
+  }
+  try {
+    const URL='http://localhost:3001/dogs'
+    let response = await axios.post(URL, dogSend);
+    dispatch(loadedDogs());
+  } catch (error) {
+    console.log('Error: ')
+    console.log(error);
+  }
  }
 
   return (
@@ -115,16 +101,34 @@ function App() {
       {location.pathname !== '/' && <Nav SearchByName={SearchByName}/>}
       <Routes>
         <Route path = '/' element = {<LandingPage/>}/>
-        <Route path = '/home' element = {<Paginador prevHandler={prevHandler} nextHandler={nextHandler} currentPage={currentPage} dogs={showing} home={true}/>}/>
-        <Route path = '/home/name' element = {<Paginador dogs={dogsName} home={false}/>}/>
+        <Route path = '/home' element = {<Paginador home={true}/>}/>
+        <Route path = '/home/name' element = {<Paginador home={false}/>}/>
         <Route path = '/detail/:id' element = {<Detail/>}/>
-        <Route path = '/createDog'/>
+        <Route path = '/createDog' element = {<Form createDog={createDog}/>}/>
       </Routes>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+     dogs: state.dogs,
+     temperaments: state.temperaments,
+     loadedDogsSwitch: state.loadedDogsSwitch,
+     dogsName: state.dogsName,
+  }
+}
+
+function mapDispatchToProps (dispatch){
+  return {
+     loadDogs: (dogs) => dispatch(loadDogs(dogs)),
+     loadTemperaments: (temperaments) => dispatch(loadTemperaments(temperaments)),
+     loadedDogs: () => dispatch(loadedDogs()),
+     loadNamed: () => dispatch(loadNamed()),
+  }
+}
+
+export default connect (mapStateToProps, mapDispatchToProps)(App);
 
 
 

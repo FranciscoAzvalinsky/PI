@@ -1,12 +1,31 @@
 import style from './Paginador.module.css'
 import Card from '../Card/Card'
-import { Link } from 'react-router-dom'
+import { connect, useDispatch } from "react-redux";
 
-export default function Paginador ({currentPage, prevHandler, nextHandler, dogs, home}) {  
+import { useEffect} from 'react';
+import { nextHandler, prevHandler, firstRender } from '../../redux/actions';
+
+function Paginador ({dogs, home, currentPage, showing, nextHandler, prevHandler}) {  
+
+    const itemsPerPage = 8;
+
+    const dispatch = useDispatch()
+  
+    useEffect (() => {
+        dispatch(firstRender(dogs, itemsPerPage));
+      }, [dogs])
+
+      const prev = () => {
+        dispatch(prevHandler(dogs, itemsPerPage, currentPage))
+      }
+
+      const next = () => {
+        dispatch(nextHandler(dogs, itemsPerPage, currentPage))
+      }
+
     let items = [];
 
-        items = dogs.map ((dog) => {
-            console.log(dog);
+        items = showing.map ((dog) => {
             return (
                     <li key={dog.id} className={style.FlexLi}>
                         <Card 
@@ -19,28 +38,31 @@ export default function Paginador ({currentPage, prevHandler, nextHandler, dogs,
                     </li>
             )
         })
- 
-        if (home){
+
             return (
                 <div>
-                    
-                    <h2>Pagina {currentPage + 1}</h2>
-                    <button onClick={prevHandler}>Prev</button>
-                    <button onClick={nextHandler}>Next</button>
+                    <h2>Pagina {currentPage+1}</h2>
+                    <button onClick={prev}>Prev</button>
+                    <button onClick={next}>Next</button>
                     <ul className={style.FlexContainer}>{items}</ul>
                 </div>
             )
-        } else {
-            return (
-                <div>
-                    <Link to = '/home'>
-                        <button>
-                            <strong>Back</strong>
-                        </button>
-                    </Link>
-                    <ul className={style.FlexContainer}>{items}</ul>
-                </div>
-            )
-        }
-    
 }
+
+
+const mapStateToProps = (state) => {
+    return {
+        dogs: state.dogs,
+        showing: state.showing,
+        currentPage: state.currentPage,
+    }
+ }
+ 
+ function mapDispatchToProps (dispatch){
+    return {
+       nextHandler: (dogs, itemsPerPage, currentPage) => dispatch(nextHandler(dogs, itemsPerPage, currentPage)),
+       prevHandler: (dogs, itemsPerPage, currentPage) => dispatch(prevHandler(dogs, itemsPerPage, currentPage)),
+    }
+ }
+ 
+ export default connect (mapStateToProps, mapDispatchToProps)(Paginador);

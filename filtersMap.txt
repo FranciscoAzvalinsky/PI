@@ -1,0 +1,26 @@
+Tengo 4 selects:
+1- Elegir si mostrar perros de la API o de la base de datos.
+2- Elegir si quiero mostrar perros de todos los temperamentos o de alguno en especifico.
+3- Elegir si quiero ordenar esos perros alfabeticamente (por su nombre) o por peso.
+4- Elegir si quiero realizar ese ordenamiento ascendentemente o descendentemente.
+
+El 1 y el 2 DEBEN trabajar en conjunto, ya que en ambos estoy eligiendo qué mostrar.
+El 3 y el 4 DEBEN trabajar en conjunto, ya que en ambos estoy eligiendo cómo mostrar.
+
+Si yo cambio el 4, todo lo que debe pasar es que los perros que estan en pantalla
+se reordenen (basicamente, que se invierta el orden que tienen).
+
+Si cambio el 3, se debe cambiar el orden que estos perros tienen. Primero se ordena
+por el elemento que se desee y luego se aplica el orden que se desea (es decir, primero se
+aplica el selector 3 y luego el selector 4).
+
+Si cambio el 2, primero que nada se deben agarrar solamente los del tipo del selector 1,
+filtrar que se muestren solo los del temperamento elegido y luego ordenarlos como indiquen
+el selector 3 y 4. (Si tan solo se modifica el mismo estado, no haria falta reordenar,
+ya que solo se estarian quitando elementos de "en medio") (es decir, se aplica el selector 2,
+luego el selector 3, y luego el selector 4).
+
+Si cambio el 1, debo cambiar de estado y elegir otro, donde se encuentren los perros
+correspondientes. Luego, debo filtrar esos perros con el elemento del selector 2, luego
+ordenarlos por el elemento que indique el selector 3, y luego de la manera que indique el
+selector 4. (es decir, se aplican los 4 selectores en orden).

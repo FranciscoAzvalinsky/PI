@@ -3,7 +3,7 @@ import style from './Detail.module.css';
 import { Link, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react';
  
-export default function Detail (){
+export default function Detail () {
     const { id } = useParams()
     const [character, setCharacter] = useState({});
 

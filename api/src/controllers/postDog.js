@@ -8,13 +8,19 @@ const stringToArray = require('./stringToArray')
 
 const postDog = async (req, res) => {
     try {
-        let dog = req.body; 
+        let dog = req.body;
         const race = await Dog.create(dog);
-        const tempers = stringToArray(dog.temperament);
+        let tempers = dog.temperament;
+        //tempers=stringToArray(tempers);
+        //console.log(tempers);
+
 
         tempers.forEach(async (temper) => {
             let iden = await Temperaments.findOne({where: {nombre: temper}});
-            await race.addTemperaments(iden.id);
+            if (iden) {
+                await race.addTemperaments(iden.id);
+            }
+            
         })
         
         if (race){
