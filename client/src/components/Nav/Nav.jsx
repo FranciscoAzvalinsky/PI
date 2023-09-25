@@ -4,8 +4,8 @@ import SearchBar from '../SearchBar/SearchBar';
 import { Link } from 'react-router-dom';
 import { connect, useDispatch } from "react-redux";
 
-import { originOfDogs, filterTemperaments, orderByType, orderWay, order } from '../../redux/actions';
-function Nav ({SearchByName, originOfDogs, temperaments, filterTemperaments, orderByType, orderWay, order}) {
+import { originOfDogs, filterTemperaments, orderByType, orderWay, order, resetFilter, loadFilterTemperaments, unreset } from '../../redux/actions';
+function Nav ({SearchByName, /*originOfDogs,*/ temperaments/*, filterTemperaments, orderByType, orderWay, order, resetFilter*/}) {
 
     let items = [];
 
@@ -23,7 +23,8 @@ function Nav ({SearchByName, originOfDogs, temperaments, filterTemperaments, ord
     }
 
     const handlerTemperaments = (e) => {
-        dispatch(filterTemperaments(e.target.value));
+        dispatch(loadFilterTemperaments(e.target.value))
+        dispatch(filterTemperaments());
         dispatch(order())
     }
 
@@ -36,6 +37,21 @@ function Nav ({SearchByName, originOfDogs, temperaments, filterTemperaments, ord
     const handlerOrder = (e) => {
         dispatch(orderWay(e.target.value));
         dispatch(order())
+    }
+
+    const reseter = (e) => {
+        //console.log(e)
+        if (e.target.checked) {
+            dispatch(resetFilter())
+            dispatch(filterTemperaments());
+            dispatch(order());
+        }
+        else {
+            dispatch(unreset())
+            dispatch(filterTemperaments());
+            dispatch(order());
+        }
+
     }
 
     return (
@@ -63,7 +79,7 @@ function Nav ({SearchByName, originOfDogs, temperaments, filterTemperaments, ord
                     <option value='A'>Ascendente</option> 
                     <option value='D'>Descendente</option>                                          
                 </select>
-
+            <input type='checkbox' onChange={reseter}></input>
             </div>
             
         </div>
@@ -81,10 +97,13 @@ const mapStateToProps = (state) => {
  function mapDispatchToProps (dispatch){
     return {
         originOfDogs: (value) => dispatch(originOfDogs(value)),
+        loadFilterTemperaments: (value) => dispatch(loadFilterTemperaments(value)),
         filterTemperaments: (value) => dispatch(filterTemperaments(value)),
         orderByType: (value) => dispatch(orderByType(value)),
         orderWay: (value) => dispatch(orderWay(value)),
         order: () => dispatch(order()),
+        resetFilter: () => dispatch(resetFilter()),
+        unreset: () => dispatch(unreset()),
     }
  }
  

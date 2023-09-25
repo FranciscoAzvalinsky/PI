@@ -1,4 +1,4 @@
-import { NEXT_HANDLER, PREV_HANDLER, FIRST_RENDER, LOAD_DOGS, ORIGIN_OF_DOGS, LOAD_TEMPERAMENTS, LOADED_DOGS, FILTER_TEMPERAMENTS, ORDER_BY_TYPE, ORDER_WAY, ORDER, LOAD_NAME, LOAD_NAMED } from "./actions";
+import { NEXT_HANDLER, PREV_HANDLER, FIRST_RENDER, LOAD_DOGS, ORIGIN_OF_DOGS, LOAD_TEMPERAMENTS, LOADED_DOGS, FILTER_TEMPERAMENTS, ORDER_BY_TYPE, ORDER_WAY, ORDER, LOAD_NAME, LOAD_NAMED, RESET_FILTER, RESET_NAME, LOAD_FILTER_TEMPERAMENTS, UNRESET } from "./actions";
 
 const initialState = {
     currentPage: 0,
@@ -9,6 +9,7 @@ const initialState = {
     dogsName: '',
     showing: [],
     temperaments: [],
+    filteredTemperaments: [],
     orderWay: 'A',
     orderType: 'raza'
 };
@@ -96,13 +97,29 @@ const reducer = (state = initialState, action) => {
                     currentPage: 0
                 }
             }
+
+        case LOAD_FILTER_TEMPERAMENTS:
+
+            if (action.payload !== 'All temperaments'){
+                return {
+                    ...state,
+                    filteredTemperaments: [...state.filteredTemperaments, action.payload]
+                }
+            }
+            else {
+                return {
+                    ...state
+                }
+            }
+         
         
         case FILTER_TEMPERAMENTS:
-            if (action.payload !=='All temperaments'){
+            if (state.filteredTemperaments[0] !=='All temperaments'){
                 let filteredDogs = state.gottenDogs.filter((dog) => {
                     if (dog.temperament) {
+                        console.log(state.filteredTemperaments)
                         const temperaments = dog.temperament.split(',').map((temper) => temper.trim());
-                        return temperaments.includes(action.payload);
+                        return state.filteredTemperaments.every((temper) => temperaments.includes(temper));
                     }
                     return false
                 });
@@ -165,6 +182,27 @@ const reducer = (state = initialState, action) => {
                     dogs: filteredDogs,
                     currentPage: 0,
                 }
+            }
+
+        case RESET_FILTER:
+            return {
+                ...state,
+                orderWay: action.payload.orderWay,
+                orderType: action.payload.orderType,
+                filteredTemperaments: action.payload.filteredTemperaments,
+            }
+
+        case UNRESET:
+            return {
+                ...state,
+                filteredTemperaments: action.payload.filteredTemperaments
+            }
+
+
+        case RESET_NAME:
+            return {
+                ...state,
+                dogsName: action.payload,
             }
 
         default:

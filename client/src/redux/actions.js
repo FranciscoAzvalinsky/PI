@@ -11,6 +11,10 @@ export const FILTER_TEMPERAMENTS = 'filter_temperaments';
 export const ORDER_BY_TYPE = 'order_by_type';
 export const ORDER_WAY = 'order_way';
 export const ORDER = 'order';
+export const RESET_FILTER = 'reset_filter';
+export const RESET_NAME = 'reset_name';
+export const LOAD_FILTER_TEMPERAMENTS = 'load_filters_temperaments';
+export const UNRESET = 'unreset';
 
 
 export function firstRender(dogs, itemsPerPage){
@@ -105,10 +109,9 @@ export function originOfDogs(value) {
     }
 }
 
-export function filterTemperaments(value){
+export function filterTemperaments(){
     return {
         type: FILTER_TEMPERAMENTS,
-        payload: value
     }
 }
 
@@ -129,5 +132,39 @@ export function orderWay(value){
 export function order () {
     return {
         type: ORDER
+    }
+}
+
+export function resetFilter(){
+    return {
+        type: RESET_FILTER,
+        payload: {
+            orderWay: 'A',
+            orderType: 'raza',
+            filteredTemperaments: ['All temperaments']
+        }
+    }
+}
+
+export function resetName(){
+    return {
+        type: RESET_NAME,
+        payload: ''
+    }
+}
+
+export function unreset(){
+    return {
+        type: UNRESET,
+        payload: {
+            filteredTemperaments: []
+        }
+    }
+}
+
+export function loadFilterTemperaments(value){
+    return {
+        type: LOAD_FILTER_TEMPERAMENTS,
+        payload: value
     }
 }

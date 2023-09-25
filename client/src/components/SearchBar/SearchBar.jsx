@@ -2,7 +2,7 @@ import style from './SearchBar.module.css';
 import { Link } from 'react-router-dom';
 
 import { connect, useDispatch } from "react-redux";
-import { loadName } from '../../redux/actions';
+import { loadName, resetName, order } from '../../redux/actions';
 
 
 function SearchBar({SearchByName, dogsName}) {
@@ -15,8 +15,15 @@ function SearchBar({SearchByName, dogsName}) {
     const handleSearch = async () => {
       await SearchByName();
     }
+
+    const clearInput = () => {
+      dispatch(resetName());
+      handleSearch();
+    }
+
     return (
        <div className={style.searchBar}>
+         <button type='button' onClick={clearInput}></button>
         <input type='search' onChange={handleChange} value = {dogsName} placeholder='Buscar una raza...'></input>
         <Link to = '/home/name'>
             <button className={style.boton} onClick={handleSearch} type="button">
@@ -36,6 +43,8 @@ function SearchBar({SearchByName, dogsName}) {
 function mapDispatchToProps (dispatch){
    return {
       loadName: (name) => dispatch(loadName(name)),
+      resetName: () => dispatch(resetName()),
+      order: () => dispatch(order())
    }
 }
 
