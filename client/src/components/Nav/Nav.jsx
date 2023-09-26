@@ -4,8 +4,8 @@ import SearchBar from '../SearchBar/SearchBar';
 import { Link } from 'react-router-dom';
 import { connect, useDispatch } from "react-redux";
 
-import { originOfDogs, filterTemperaments, orderByType, orderWay, order, resetFilter, loadFilterTemperaments, unreset } from '../../redux/actions';
-function Nav ({SearchByName, /*originOfDogs,*/ temperaments/*, filterTemperaments, orderByType, orderWay, order, resetFilter*/}) {
+import { originOfDogs, filterTemperaments, orderByType, orderWay, order, resetFilter, loadFilterTemperaments, unreset, deleteFilterTemp } from '../../redux/actions';
+function Nav ({SearchByName, temperaments, filteredTemperaments}) {
 
     let items = [];
 
@@ -40,7 +40,6 @@ function Nav ({SearchByName, /*originOfDogs,*/ temperaments/*, filterTemperament
     }
 
     const reseter = (e) => {
-        //console.log(e)
         if (e.target.checked) {
             dispatch(resetFilter())
             dispatch(filterTemperaments());
@@ -51,8 +50,15 @@ function Nav ({SearchByName, /*originOfDogs,*/ temperaments/*, filterTemperament
             dispatch(filterTemperaments());
             dispatch(order());
         }
-
     }
+
+    const handleDeleteElement = (index) => {
+        dispatch(deleteFilterTemp(index))
+        dispatch(filterTemperaments());
+        dispatch(order());
+    }
+
+    
 
     return (
         <div className={style.divDiv}>
@@ -71,6 +77,13 @@ function Nav ({SearchByName, /*originOfDogs,*/ temperaments/*, filterTemperament
                     <option value='All temperaments'>All temperaments</option>
                     {items}
                 </select>
+                <div className={style.divTemps}>
+                    <ul className={style.ulTemps}>
+                        {filteredTemperaments.map((temper, index) => (
+                            <li key={index}>{temper} <button onClick={() => handleDeleteElement(index)}>X</button></li>
+                        ))}
+                    </ul>
+                </div>
                 <select onChange={handlerType}>
                     <option value='raza'>Raza</option>
                     <option value='peso'>Peso</option>
@@ -79,7 +92,8 @@ function Nav ({SearchByName, /*originOfDogs,*/ temperaments/*, filterTemperament
                     <option value='A'>Ascendente</option> 
                     <option value='D'>Descendente</option>                                          
                 </select>
-            <input type='checkbox' onChange={reseter}></input>
+            <input type='checkbox' id='reseter' onChange={reseter}></input>
+            <label for="reseter">Default values</label>
             </div>
             
         </div>
@@ -91,6 +105,7 @@ const mapStateToProps = (state) => {
     return {
        showing: state.showing,
        temperaments: state.temperaments,
+       filteredTemperaments: state.filteredTemperaments,
     }
  }
  
@@ -104,6 +119,7 @@ const mapStateToProps = (state) => {
         order: () => dispatch(order()),
         resetFilter: () => dispatch(resetFilter()),
         unreset: () => dispatch(unreset()),
+        deleteFilterTemp: (index) => dispatch(deleteFilterTemp(index)),
     }
  }
  

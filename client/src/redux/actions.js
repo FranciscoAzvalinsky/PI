@@ -8,6 +8,7 @@ export const LOADED_DOGS = 'loaded_dogs';
 export const LOAD_TEMPERAMENTS = 'load_temperaments';
 export const ORIGIN_OF_DOGS = 'origin_of_dogs';
 export const FILTER_TEMPERAMENTS = 'filter_temperaments';
+export const DELETE_FILTER_TEMP = 'delete_filter_temp'
 export const ORDER_BY_TYPE = 'order_by_type';
 export const ORDER_WAY = 'order_way';
 export const ORDER = 'order';
@@ -112,6 +113,13 @@ export function originOfDogs(value) {
 export function filterTemperaments(){
     return {
         type: FILTER_TEMPERAMENTS,
+    }
+}
+
+export function deleteFilterTemp(index){
+    return {
+        type: DELETE_FILTER_TEMP,
+        payload: index
     }
 }
 

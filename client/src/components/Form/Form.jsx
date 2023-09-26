@@ -51,6 +51,33 @@ export default function Form ({createDog}) {
         }));
     }
 
+    const handleImage = (e) => {
+        const file = e.target.files[0];
+        
+
+        if (file && file.type.startsWith('image/')){
+            console.log('llegue 1');
+            const imageURL = URL.createObjectURL(file)
+            setDogData({...dogData, reference_image_id: imageURL})
+            console.log('llegue 2');
+
+            const imgPreview = document.getElementById('image-preview');
+            if (imgPreview){
+                console.log('llegue 3');
+                imgPreview.src=URL.createObjectURL(file);
+                console.log('llegue 4');
+            }
+        } else {
+            setDogData({...dogData, reference_image_id: ''})
+            console.log('llegue 3');
+
+            const imgPreview = document.getElementById('image-preview');
+            if (imgPreview){
+                imgPreview.src='';
+            }
+        }
+    }
+
     const handleClick = (e) => {
         if (temperaments.trim() !== ''){
             setDogData({
@@ -129,8 +156,11 @@ export default function Form ({createDog}) {
                     <button type='button' onClick={handleClick}>Agregar</button>
                 </div>
                 <div>
-                    <input type='file' name='reference_image_id' id='foto' accept='image/*' value={dogData.reference_image_id} onChange={handleChange}></input>
-                    <label for='reference_image_id'></label>
+                    <input type='file' name='image' id='image' accept='image/*' onChange={handleImage}></input>
+                    <label for='foto'></label>
+                    {dogData.reference_image_id &&
+                    <img id='image-preview' src={dogData.reference_image_id} alt='Vista previa' className={style.imgPreview}></img>}
+                    
                 </div>
                 <hr></hr>
                 <button type = 'submit'>

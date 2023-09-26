@@ -12,9 +12,9 @@ import Form from  './components/Form/Form';
 
 import axios from 'axios';
 
-import { loadDogs, loadNamed, loadTemperaments, loadedDogs } from './redux/actions';
+import { loadDogs, loadNamed, loadTemperaments, loadedDogs, } from './redux/actions';
 
-function App({dogs, loadDogs, loadTemperaments, loadedDogs, loadedDogsSwitch, dogsName}) {
+function App({dogs, loadDogs, loadTemperaments, loadedDogs, loadedDogsSwitch}) {
 
   let location = useLocation();
   const dispatch = useDispatch();
@@ -54,27 +54,9 @@ function App({dogs, loadDogs, loadTemperaments, loadedDogs, loadedDogsSwitch, do
     cargarTemperaments();
   }, [])
 
-  //const [dogsName, setDogsName] = useState([]);
-
-
   const SearchByName = async () => {
     dispatch(loadNamed())
-    /*try {
-       const result = await axios(`http://localhost:3001/dogs/name?name=${name}`)
-       if (result.data) {
-        console.log(result.data);
-        setDogsName(result.data);
-        console.log(name)
-       } else {
-          window.alert("No existe una raza de perro con ese nombre")
-       }
-    } catch(error) {
-       console.log(error)
-       window.alert(error.result)
-    }*/
-
  }
-
 
  const createDog = async (dogReceived) => {
   let dogSend = {

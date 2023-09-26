@@ -17,7 +17,9 @@ const getRaces = async (req, res) => {
                 } else {
                     extension = 'jpg';
                 }
-                dog.reference_image_id = `${URL_2}/${dog.reference_image_id}.${extension}`
+                if (!dog.reference_image_id.startsWith('blob')){
+                    dog.reference_image_id = `${URL_2}/${dog.reference_image_id}.${extension}`
+                }
             })
             res.status(200).json(data);
         }

@@ -5,7 +5,7 @@ import { connect, useDispatch } from "react-redux";
 import { useEffect} from 'react';
 import { nextHandler, prevHandler, firstRender } from '../../redux/actions';
 
-function Paginador ({dogs, home, currentPage, showing, nextHandler, prevHandler}) {  
+function Paginador ({dogs, currentPage, showing, nextHandler, prevHandler}) {  
 
     const itemsPerPage = 8;
 
@@ -42,6 +42,7 @@ function Paginador ({dogs, home, currentPage, showing, nextHandler, prevHandler}
             return (
                 <div>
                     <h2>Pagina {currentPage+1}</h2>
+                    <h2> {dogs.length} resultados</h2>
                     <button onClick={prev}>Prev</button>
                     <button onClick={next}>Next</button>
                     <ul className={style.FlexContainer}>{items}</ul>

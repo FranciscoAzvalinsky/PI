@@ -1,17 +1,17 @@
-import { NEXT_HANDLER, PREV_HANDLER, FIRST_RENDER, LOAD_DOGS, ORIGIN_OF_DOGS, LOAD_TEMPERAMENTS, LOADED_DOGS, FILTER_TEMPERAMENTS, ORDER_BY_TYPE, ORDER_WAY, ORDER, LOAD_NAME, LOAD_NAMED, RESET_FILTER, RESET_NAME, LOAD_FILTER_TEMPERAMENTS, UNRESET } from "./actions";
+import { NEXT_HANDLER, PREV_HANDLER, FIRST_RENDER, LOAD_DOGS, ORIGIN_OF_DOGS, LOAD_TEMPERAMENTS, LOADED_DOGS, FILTER_TEMPERAMENTS, ORDER_BY_TYPE, ORDER_WAY, ORDER, LOAD_NAME, LOAD_NAMED, RESET_FILTER, RESET_NAME, LOAD_FILTER_TEMPERAMENTS, UNRESET, DELETE_FILTER_TEMP } from "./actions";
 
 const initialState = {
-    currentPage: 0,
     dogs: [],
     gottenDogs: [],
-    loadedDogsSwitch: 0,
     allDogs: [],
-    dogsName: '',
     showing: [],
     temperaments: [],
     filteredTemperaments: [],
+    dogsName: '',
     orderWay: 'A',
-    orderType: 'raza'
+    orderType: 'raza',
+    loadedDogsSwitch: 0,
+    currentPage: 0,
 };
 
 const reducer = (state = initialState, action) => {
@@ -114,7 +114,7 @@ const reducer = (state = initialState, action) => {
          
         
         case FILTER_TEMPERAMENTS:
-            if (state.filteredTemperaments[0] !=='All temperaments'){
+            if (state.filteredTemperaments[0] !=='All temperaments' && state.filteredTemperaments[0] ){
                 let filteredDogs = state.gottenDogs.filter((dog) => {
                     if (dog.temperament) {
                         console.log(state.filteredTemperaments)
@@ -134,6 +134,14 @@ const reducer = (state = initialState, action) => {
                     dogs: state.gottenDogs,
                     currentPage: 0,
                 }
+            }
+
+        case DELETE_FILTER_TEMP:
+            let filteredTemper = [...state.filteredTemperaments];
+            filteredTemper.splice(action.payload, 1);
+            return {
+                ...state,
+                filteredTemperaments: filteredTemper,
             }
 
         case ORDER_BY_TYPE:

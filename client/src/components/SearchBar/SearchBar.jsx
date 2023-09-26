@@ -23,7 +23,8 @@ function SearchBar({SearchByName, dogsName}) {
 
     return (
        <div className={style.searchBar}>
-         <button type='button' onClick={clearInput}></button>
+         <label for='clearName'>Clear name</label>
+         <input type='checkbox' onClick={clearInput} id='clearName' className={style.boton2}></input>
         <input type='search' onChange={handleChange} value = {dogsName} placeholder='Buscar una raza...'></input>
         <Link to = '/home/name'>
             <button className={style.boton} onClick={handleSearch} type="button">
