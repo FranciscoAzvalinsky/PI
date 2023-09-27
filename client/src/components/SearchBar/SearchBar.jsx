@@ -25,10 +25,10 @@ function SearchBar({SearchByName, dogsName}) {
        <div className={style.searchBar}>
          <label for='clearName'>Clear name</label>
          <input type='checkbox' onClick={clearInput} id='clearName' className={style.boton2}></input>
-        <input type='search' onChange={handleChange} value = {dogsName} placeholder='Buscar una raza...'></input>
+        <input type='search' onChange={handleChange} value = {dogsName} placeholder='Search for a race...'></input>
         <Link to = '/home/name'>
             <button className={style.boton} onClick={handleSearch} type="button">
-               <strong>Buscar</strong>
+               <strong>Search</strong>
             </button>
          </Link>
        </div>

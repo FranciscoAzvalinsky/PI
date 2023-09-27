@@ -58,14 +58,12 @@ function Nav ({SearchByName, temperaments, filteredTemperaments}) {
         dispatch(order());
     }
 
-    
-
     return (
         <div className={style.divDiv}>
             <SearchBar SearchByName={SearchByName}></SearchBar>
             <Link to='/createDog'>
                 <button>
-                    <strong>Crea tu propia raza de perros!</strong>
+                    <strong>Create your own dog's race!</strong>
                 </button>
             </Link>
             <div className={style.divSelect}>
@@ -85,12 +83,12 @@ function Nav ({SearchByName, temperaments, filteredTemperaments}) {
                     </ul>
                 </div>
                 <select onChange={handlerType}>
-                    <option value='raza'>Raza</option>
-                    <option value='peso'>Peso</option>
+                    <option value='raza'>Race</option>
+                    <option value='peso'>Weight</option>
                 </select>
                 <select onChange={handlerOrder}>
-                    <option value='A'>Ascendente</option> 
-                    <option value='D'>Descendente</option>                                          
+                    <option value='A'>Ascending </option> 
+                    <option value='D'>Descending</option>                                          
                 </select>
             <input type='checkbox' id='reseter' onChange={reseter}></input>
             <label for="reseter">Default values</label>

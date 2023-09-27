@@ -6,7 +6,7 @@ const { Dog } = require('../db')
 
 const getRaces = async (req, res) => {
     try {
-        let extension;
+        let extension
         let { data } = await axios(`${URL}?api_key=${API_KEY}`);
         let data1 = await Dog.findAll();
         data=data.concat(data1);

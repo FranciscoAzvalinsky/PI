@@ -1,8 +1,9 @@
 import style from './Paginador.module.css'
 import Card from '../Card/Card'
+import Button from '../Button/Button';
 import { connect, useDispatch } from "react-redux";
 
-import { useEffect} from 'react';
+import { useEffect } from 'react';
 import { nextHandler, prevHandler, firstRender } from '../../redux/actions';
 
 function Paginador ({dogs, currentPage, showing, nextHandler, prevHandler}) {  
@@ -41,10 +42,12 @@ function Paginador ({dogs, currentPage, showing, nextHandler, prevHandler}) {
 
             return (
                 <div>
-                    <h2>Pagina {currentPage+1}</h2>
-                    <h2> {dogs.length} resultados</h2>
-                    <button onClick={prev}>Prev</button>
-                    <button onClick={next}>Next</button>
+                    <h2>Page {currentPage+1}</h2>
+                    <h2> {dogs.length} results</h2>
+                    <div className={style.buttonDiv}>
+                        <Button text='Prev page' onClick={prev} marginRight='20px' ></Button>
+                        <Button text='Next page' onClick={next} marginLeft='20px' ></Button>
+                    </div>
                     <ul className={style.FlexContainer}>{items}</ul>
                 </div>
             )

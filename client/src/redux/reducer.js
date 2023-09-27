@@ -7,6 +7,7 @@ const initialState = {
     showing: [],
     temperaments: [],
     filteredTemperaments: [],
+    firstLoad: true,
     dogsName: '',
     orderWay: 'A',
     orderType: 'raza',
@@ -61,12 +62,21 @@ const reducer = (state = initialState, action) => {
 
         
         case LOAD_DOGS:
-            return{
-                ...state,
-                dogs: action.payload.fragment,
-                gottenDogs: action.payload.fragment,
-                allDogs: action.payload.fragment
+            if (state.firstLoad){
+                return{
+                    ...state,
+                    dogs: action.payload.fragment,
+                    gottenDogs: action.payload.fragment,
+                    allDogs: action.payload.fragment,
+                    firstLoad: false,
+                }
+            } else {
+                return {
+                    ...state,
+                    allDogs: action.payload.fragment
+                }
             }
+
         
         case LOADED_DOGS:
             return{
@@ -87,16 +97,17 @@ const reducer = (state = initialState, action) => {
                     ...state,
                     dogs: state.allDogs.slice(0, 172),
                     gottenDogs: state.allDogs.slice(0, 172),
-                    currentPage: 0
+                    currentPage: 0,
                 }
             } else if (action.payload === 'Bdd'){
                 return {
                     ...state,
                     dogs: state.allDogs.slice(172),
                     gottenDogs: state.allDogs.slice(172),
-                    currentPage: 0
+                    currentPage: 0,
                 }
             }
+            break;
 
         case LOAD_FILTER_TEMPERAMENTS:
 
@@ -191,6 +202,7 @@ const reducer = (state = initialState, action) => {
                     currentPage: 0,
                 }
             }
+            break;
 
         case RESET_FILTER:
             return {

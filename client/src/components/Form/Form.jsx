@@ -4,6 +4,8 @@ import style from './Form.module.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 
+import Button from '../Button/Button';
+
 export default function Form ({createDog}) {
     const [dogData, setDogData]= useState({
         name: "",
@@ -116,57 +118,54 @@ export default function Form ({createDog}) {
             
             <form className={style.divDetail} onSubmit={handleSubmit}>
             <Link to='/home'>
-                <button>Back to Home</button>
+                <Button text='Back to Home'></Button>
             </Link>
                 <h3 className={style.text}>Crea una raza de perros!</h3>
                 <div>
-                    <label className={style.text} for='name'>Nombre: </label>
+                    <label className={style.text} for='name'>Name: </label>
                     <input name='name' value={dogData.name} onChange={handleChange}></input>
                     {errors.name && <p>{errors.name}</p>}
                 </div>
                 <div>
-                    <label className={style.text} for='weightMin'>Peso minimo:</label>
+                    <label className={style.text} for='weightMin'>Minimum weight: </label>
                     <input name='weightMin' value={dogData.weightMin} onChange={handleChange}></input>
                     {errors.weightMin && <p>{errors.weightMin}</p>}
                 </div>
                 <div>
-                    <label className={style.text} for='weightMax'>Peso maximo:</label>
+                    <label className={style.text} for='weightMax'>Maximum weight: </label>
                     <input name='weightMax' value={dogData.weightMax} onChange={handleChange}></input>
                     {errors.weightMax && <p>{errors.weightMax}</p>}
                 </div>
                 <div>
-                    <label className={style.text} for='heightMin'>Altura minima:</label>
+                    <label className={style.text} for='heightMin'>Minimum height: </label>
                     <input name='heightMin' value={dogData.heightMin} onChange={handleChange}></input>
                     {errors.heightMin && <p>{errors.heightMin}</p>}
                 </div>
                 <div>
-                    <label className={style.text} for='heightMax'>Altura maxima:</label>
+                    <label className={style.text} for='heightMax'>Maximum height: </label>
                     <input name='heightMax' value={dogData.heightMax} onChange={handleChange}></input>
                     {errors.heightMax && <p>{errors.heightMax}</p>}
                 </div>
                 <div>
-                    <label className={style.text} for='life_span'>Años de vida: </label>
+                    <label className={style.text} for='life_span'>Life span: </label>
                     <input name='life_span' value={dogData.life_span} onChange={handleChange}></input>
                     {errors.life_span && <p>{errors.life_span}</p>}
                 </div>
                 <div>
-                    <label className={style.text} for='temperament'>Temperamento(s): </label>
+                    <label className={style.text} for='temperament'>Temperament(s): </label>
                     <input name='temperament' value={temperaments} onChange={handleChange}></input>
                     {errors.temperament && <p>{errors.temperament}</p>}
-                    <button type='button' onClick={handleClick}>Agregar</button>
+                    
+                    <Button text='Add' type='button' onClick={handleClick}></Button>
                 </div>
                 <div>
+                    <label className={style.text} for="image">Image:</label>
                     <input type='file' name='image' id='image' accept='image/*' onChange={handleImage}></input>
-                    <label for='foto'></label>
                     {dogData.reference_image_id &&
-                    <img id='image-preview' src={dogData.reference_image_id} alt='Vista previa' className={style.imgPreview}></img>}
-                    
+                    <img id='image-preview' src={dogData.reference_image_id} alt='Vista previa' className={style.imgPreview}></img>}                
                 </div>
                 <hr></hr>
-                <button type = 'submit'>
-                    <strong>Crear</strong>
-                </button>
-                
+                <Button text='Crear' type='submit'></Button>
             </form>
         </div>
     )

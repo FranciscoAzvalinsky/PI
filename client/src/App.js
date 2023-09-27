@@ -1,6 +1,6 @@
 import './App.css';
 
-import { useState , useEffect} from 'react';
+import { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { connect, useDispatch } from "react-redux";
 
@@ -12,7 +12,7 @@ import Form from  './components/Form/Form';
 
 import axios from 'axios';
 
-import { loadDogs, loadNamed, loadTemperaments, loadedDogs, } from './redux/actions';
+import { loadDogs, loadNamed, loadTemperaments, loadedDogs } from './redux/actions';
 
 function App({dogs, loadDogs, loadTemperaments, loadedDogs, loadedDogsSwitch}) {
 
@@ -70,7 +70,7 @@ function App({dogs, loadDogs, loadTemperaments, loadedDogs, loadedDogsSwitch}) {
   }
   try {
     const URL='http://localhost:3001/dogs'
-    let response = await axios.post(URL, dogSend);
+    await axios.post(URL, dogSend);
     dispatch(loadedDogs());
   } catch (error) {
     console.log('Error: ')

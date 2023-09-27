@@ -14,7 +14,7 @@ try {
     else {
         let { data } = await axios(`${URL}${idRaza}?api_key=${API_KEY}`)
         if (data) {
-            let extension;
+            let extension
             if (data.id === 15 || data.id === 125 || data.id === 212) {
                 extension = 'png';
             } else {
