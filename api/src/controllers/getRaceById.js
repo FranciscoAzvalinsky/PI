@@ -2,12 +2,23 @@ const axios = require('axios');
 const URL = 'https://api.thedogapi.com/v1/breeds/'
 const URL_2 = 'https://cdn2.thedogapi.com/images';
 const { API_KEY } = process.env;
-const { Dog } = require('../db')
+const { Dog, Temperaments } = require('../db')
 
 const getRaceById = async (req, res) => {
 const { idRaza } = req.params;
 try {
-    let response2 = await Dog.findOne({where: {id: idRaza}});
+    let response2 = await Dog.findOne({
+        where: { id: idRaza },
+        include: [
+            {
+                model: Temperaments,
+                attributes: ["nombre"],
+                through: {
+                    attributes: [],
+                },
+            },
+        ],
+    });
     if (response2) {
         res.status(201).send(response2);
     }

@@ -1,8 +1,12 @@
 import style from './SearchBar.module.css';
 import { Link } from 'react-router-dom';
 
+import Checkbox from '../Checkbox/Checkbox';
+import Button from '../Button/Button';
+
 import { connect, useDispatch } from "react-redux";
 import { loadName, resetName, order } from '../../redux/actions';
+
 
 
 function SearchBar({SearchByName, dogsName}) {
@@ -23,13 +27,10 @@ function SearchBar({SearchByName, dogsName}) {
 
     return (
        <div className={style.searchBar}>
-         <label for='clearName'>Clear name</label>
-         <input type='checkbox' onClick={clearInput} id='clearName' className={style.boton2}></input>
-        <input type='search' onChange={handleChange} value = {dogsName} placeholder='Search for a race...'></input>
+         <Checkbox text='Clear name' onClick={clearInput}></Checkbox>
+        <input type='text' onChange={handleChange} value = {dogsName} placeholder='Search for a race...' className={style.input}></input>
         <Link to = '/home/name'>
-            <button className={style.boton} onClick={handleSearch} type="button">
-               <strong>Search</strong>
-            </button>
+            <Button text='Search' onClick={handleSearch} marginLeft={'15px'} marginRight={'15px'}></Button>
          </Link>
        </div>
     );

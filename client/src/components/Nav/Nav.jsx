@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { connect, useDispatch } from "react-redux";
 
 import { originOfDogs, filterTemperaments, orderByType, orderWay, order, resetFilter, loadFilterTemperaments, unreset, deleteFilterTemp } from '../../redux/actions';
+import Checkbox from '../Checkbox/Checkbox';
 function Nav ({SearchByName, temperaments, filteredTemperaments}) {
 
     let items = [];
@@ -90,8 +91,7 @@ function Nav ({SearchByName, temperaments, filteredTemperaments}) {
                     <option value='A'>Ascending </option> 
                     <option value='D'>Descending</option>                                          
                 </select>
-            <input type='checkbox' id='reseter' onChange={reseter}></input>
-            <label for="reseter">Default values</label>
+            <Checkbox text='Default values' onChange={reseter}></Checkbox>
             </div>
             
         </div>

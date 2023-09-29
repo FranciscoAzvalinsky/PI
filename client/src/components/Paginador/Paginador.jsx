@@ -32,7 +32,8 @@ function Paginador ({dogs, currentPage, showing, nextHandler, prevHandler}) {
                         <Card 
                             image={dog.reference_image_id} 
                             name={dog.name} 
-                            temperament={dog.temperament} 
+                            temperament={dog.temperament}
+                            temperaments={dog?.temperaments} 
                             weight={dog.weight.metric} 
                             id={dog.id}>
                         </Card>
@@ -42,13 +43,16 @@ function Paginador ({dogs, currentPage, showing, nextHandler, prevHandler}) {
 
             return (
                 <div>
-                    <h2>Page {currentPage+1}</h2>
-                    <h2> {dogs.length} results</h2>
-                    <div className={style.buttonDiv}>
-                        <Button text='Prev page' onClick={prev} marginRight='20px' ></Button>
-                        <Button text='Next page' onClick={next} marginLeft='20px' ></Button>
-                    </div>
+                    <h3>Page {currentPage+1}</h3>
+                    <h3> 
+                        <div className={style.buttonDiv}>
+                            <Button text='Prev page' onClick={prev} marginRight='20px' ></Button>
+                            {dogs.length} results
+                            <Button text='Next page' onClick={next} marginLeft='20px' ></Button>
+                        </div>
+                    </h3>
                     <ul className={style.FlexContainer}>{items}</ul>
+                    
                 </div>
             )
 }

@@ -6,7 +6,7 @@
     flex-wrap: wrap;
     font-family: 'Open Sans Condensed', sans-serif;
     width: 350px;
-    height: 925px;
+    height: 1120px;
     margin-top: 3%;
     padding: 0px;
     margin-left: 40.5%;
@@ -34,4 +34,8 @@
 .imgPreview{
     height: 250px;
     border: 1px solid black;
+}
+
+.input{
+    margin-bottom: 15px;
 }

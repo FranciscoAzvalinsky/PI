@@ -14,10 +14,6 @@ export default function validation(inputs){
 
 
       console.log(inputs);
-      console.log('------------------------------------------')
-      console.log(inputs.temperament);
-
-
 
       const isWord = (word) => {
         let isWord = true;

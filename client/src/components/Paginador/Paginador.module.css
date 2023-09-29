@@ -5,7 +5,6 @@
     align-items: flex-start;
     align-content: baseline;
     width: 97.5%;
-    height: 1%;
     overflow: auto;
     flex-direction: row;
     list-style-type: none;
@@ -14,13 +13,17 @@
 .FlexLi {
     width: 360px;
     height: 420px;
-    margin: 47px;
+    margin-left: 47px;
+    margin-right: 47px;
+    margin-bottom: 25px;
 }
 
 .buttonDiv{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
 }
 
 .buttons{

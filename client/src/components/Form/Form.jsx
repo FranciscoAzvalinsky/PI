@@ -5,8 +5,14 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 
 import Button from '../Button/Button';
+import PopUp from '../PopUp/PopUp';
 
 export default function Form ({createDog}) {
+
+
+    const [popUp, setPopUp] = useState(false);
+    const [firstLoad, setFirstLoad] = useState(false);
+
     const [dogData, setDogData]= useState({
         name: "",
         reference_image_id: '',
@@ -19,7 +25,6 @@ export default function Form ({createDog}) {
     });
 
     const [temperaments, setTemperaments]= useState('');
-
 
     const [errors, setErrors]= useState({});
 
@@ -53,26 +58,24 @@ export default function Form ({createDog}) {
         }));
     }
 
+    useEffect(() => {
+        handleChange({target: {name: 'temperament', value: null}})
+        setFirstLoad(true)
+    }, firstLoad)
+
     const handleImage = (e) => {
         const file = e.target.files[0];
         
 
         if (file && file.type.startsWith('image/')){
-            console.log('llegue 1');
             const imageURL = URL.createObjectURL(file)
             setDogData({...dogData, reference_image_id: imageURL})
-            console.log('llegue 2');
-
             const imgPreview = document.getElementById('image-preview');
             if (imgPreview){
-                console.log('llegue 3');
                 imgPreview.src=URL.createObjectURL(file);
-                console.log('llegue 4');
             }
         } else {
             setDogData({...dogData, reference_image_id: ''})
-            console.log('llegue 3');
-
             const imgPreview = document.getElementById('image-preview');
             if (imgPreview){
                 imgPreview.src='';
@@ -94,7 +97,6 @@ export default function Form ({createDog}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!errors.name && !errors.weightMin && !errors.weightMax && !errors.heightMin && !errors.heightMax && !errors.life_span && !errors.temperament){
-            console.log('entre');
             await createDog(dogData);
             setDogData({
                 name: "",
@@ -108,63 +110,65 @@ export default function Form ({createDog}) {
             })
         }
         else {
-
+           setPopUp(true);
         }
+    }
 
+    const closePopUp = () => {
+        setPopUp(false);
     }
 
     return (
         <div className={style.divDiv}>
-            
+            {popUp && <PopUp text='Your creation is not valid. Please address the invalid fields.' onClick={closePopUp}></PopUp>}
             <form className={style.divDetail} onSubmit={handleSubmit}>
             <Link to='/home'>
-                <Button text='Back to Home'></Button>
+                <Button text='Back to Home' marginTop='8px'></Button>
             </Link>
-                <h3 className={style.text}>Crea una raza de perros!</h3>
+                <h3 className={style.text}>Create a dog's race!</h3>
                 <div>
                     <label className={style.text} for='name'>Name: </label>
                     <input name='name' value={dogData.name} onChange={handleChange}></input>
-                    {errors.name && <p>{errors.name}</p>}
+                    {errors.name ? <p style={{color: 'red'}}>{errors.name}</p> : <p style={{color: 'green'}}>Valid name</p>}
                 </div>
                 <div>
                     <label className={style.text} for='weightMin'>Minimum weight: </label>
                     <input name='weightMin' value={dogData.weightMin} onChange={handleChange}></input>
-                    {errors.weightMin && <p>{errors.weightMin}</p>}
+                    {errors.weightMin ? <p style={{color: 'red'}}>{errors.weightMin}</p> : <p style={{color: 'green'}}>Valid minimum weight</p>}
                 </div>
                 <div>
                     <label className={style.text} for='weightMax'>Maximum weight: </label>
                     <input name='weightMax' value={dogData.weightMax} onChange={handleChange}></input>
-                    {errors.weightMax && <p>{errors.weightMax}</p>}
+                    {errors.weightMax ? <p style={{color: 'red'}}>{errors.weightMax}</p> : <p style={{color: 'green'}}>Valid maximum weight</p>}
                 </div>
                 <div>
                     <label className={style.text} for='heightMin'>Minimum height: </label>
                     <input name='heightMin' value={dogData.heightMin} onChange={handleChange}></input>
-                    {errors.heightMin && <p>{errors.heightMin}</p>}
+                    {errors.heightMin ? <p style={{color: 'red'}}>{errors.heightMin}</p> : <p style={{color: 'green'}}>Valid minimum height</p>}
                 </div>
                 <div>
                     <label className={style.text} for='heightMax'>Maximum height: </label>
                     <input name='heightMax' value={dogData.heightMax} onChange={handleChange}></input>
-                    {errors.heightMax && <p>{errors.heightMax}</p>}
+                    {errors.heightMax ? <p style={{color: 'red'}}>{errors.heightMax}</p> : <p style={{color: 'green'}}>Valid maximum height</p>}
                 </div>
                 <div>
                     <label className={style.text} for='life_span'>Life span: </label>
                     <input name='life_span' value={dogData.life_span} onChange={handleChange}></input>
-                    {errors.life_span && <p>{errors.life_span}</p>}
+                    {errors.life_span ? <p style={{color: 'red'}}>{errors.life_span}</p> : <p style={{color: 'green'}}>Valid life span</p>}
                 </div>
                 <div>
                     <label className={style.text} for='temperament'>Temperament(s): </label>
-                    <input name='temperament' value={temperaments} onChange={handleChange}></input>
-                    {errors.temperament && <p>{errors.temperament}</p>}
-                    
+                    <input name='temperament' value={temperaments} onChange={handleChange} className={style.input}></input>
                     <Button text='Add' type='button' onClick={handleClick}></Button>
+                    {errors.temperament ? <p style={{color: 'red'}}>{errors.temperament}</p> : <p style={{color: 'green'}}>Valid temperament(s)</p>}
                 </div>
                 <div>
                     <label className={style.text} for="image">Image:</label>
                     <input type='file' name='image' id='image' accept='image/*' onChange={handleImage}></input>
+                    {!dogData.reference_image_id && <p style={{color: 'red'}}>Image is required</p>}
                     {dogData.reference_image_id &&
                     <img id='image-preview' src={dogData.reference_image_id} alt='Vista previa' className={style.imgPreview}></img>}                
                 </div>
-                <hr></hr>
                 <Button text='Crear' type='submit'></Button>
             </form>
         </div>

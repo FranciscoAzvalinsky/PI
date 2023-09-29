@@ -9,12 +9,13 @@ import Nav from './components/Nav/Nav';
 import Paginador from './components/Paginador/Paginador';
 import Detail from './components/Detail/Detail';
 import Form from  './components/Form/Form';
+import PopUp from './components/PopUp/PopUp';
 
 import axios from 'axios';
 
 import { loadDogs, loadNamed, loadTemperaments, loadedDogs } from './redux/actions';
 
-function App({dogs, loadDogs, loadTemperaments, loadedDogs, loadedDogsSwitch}) {
+function App({allDogs, loadDogs, loadTemperaments, loadedDogs, loadedDogsSwitch}) {
 
   let location = useLocation();
   const dispatch = useDispatch();
@@ -60,7 +61,7 @@ function App({dogs, loadDogs, loadTemperaments, loadedDogs, loadedDogsSwitch}) {
 
  const createDog = async (dogReceived) => {
   let dogSend = {
-    id: dogs.length+93,
+    id: allDogs.length+93,
     name: dogReceived.name,
     weight: {metric: `${dogReceived.weightMin} - ${dogReceived.weightMax}`},
     height: {metric: `${dogReceived.heightMin} - ${dogReceived.heightMax}`},
@@ -98,6 +99,7 @@ const mapStateToProps = (state) => {
      temperaments: state.temperaments,
      loadedDogsSwitch: state.loadedDogsSwitch,
      dogsName: state.dogsName,
+     allDogs: state.allDogs
   }
 }
 
