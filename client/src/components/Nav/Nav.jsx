@@ -67,6 +67,9 @@ function Nav ({SearchByName, temperaments, filteredTemperaments}) {
                     <strong>Create your own dog's race!</strong>
                 </button>
             </Link>
+            <h3 className={style.label}>
+                DOGS
+            </h3>
             <div className={style.divSelect}>
                 <select onChange={handlerOrigin}>
                     <option value='Api'>API</option>
@@ -79,7 +82,7 @@ function Nav ({SearchByName, temperaments, filteredTemperaments}) {
                 <div className={style.divTemps}>
                     <ul className={style.ulTemps}>
                         {filteredTemperaments.map((temper, index) => (
-                            <li key={index}>{temper} <button onClick={() => handleDeleteElement(index)}>X</button></li>
+                            <li className={style.li} key={index}>{temper} <button onClick={() => handleDeleteElement(index)}>X</button></li>
                         ))}
                     </ul>
                 </div>

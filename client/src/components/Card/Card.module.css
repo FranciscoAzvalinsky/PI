@@ -8,13 +8,14 @@
     width: 360px;
     height: 425px;
     margin-top: 0%;
-    background: rgb(85, 71, 25);
+    background: rgb(2, 0, 110);
     border-radius: 10px;
     border: 1px solid black;
 }
 
 .text{
-    font-weight: bold;
+    font-weight: lighter;
+    color: white;
     font-size: 18px;
 }
 

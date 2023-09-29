@@ -6,12 +6,13 @@
     flex-wrap: wrap;
     font-family: 'Open Sans Condensed', sans-serif;
     width: 360px;
-    height: 625px;
+    height: 660px;
     margin-top: 5%;
     margin-left: 40.5%;
-    background: rgb(85, 71, 25);
+    background: rgb(2, 0, 110);
     border-radius: 10px;
     border: 1px solid black;
+    color: white;
 }
 
 .divDiv{
@@ -21,7 +22,7 @@
 
 
 .text{
-    font-weight: bold;
+    font-weight: lighter;
     font-size: 18px;
 }
 

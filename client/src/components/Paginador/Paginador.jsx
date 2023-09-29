@@ -43,8 +43,8 @@ function Paginador ({dogs, currentPage, showing, nextHandler, prevHandler}) {
 
             return (
                 <div>
-                    <h3>Page {currentPage+1}</h3>
-                    <h3> 
+                    <h3 className={style.h3}>Page {currentPage+1}</h3>
+                    <h3 className={style.h3}> 
                         <div className={style.buttonDiv}>
                             <Button text='Prev page' onClick={prev} marginRight='20px' ></Button>
                             {dogs.length} results

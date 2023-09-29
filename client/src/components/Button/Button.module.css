@@ -1,4 +1,4 @@
-button {
+.button {
   width: fit-content;
   min-width: 100px;
   height: 45px;
@@ -13,11 +13,11 @@ button {
   font-family: 'Poppins', sans-serif;
 }
 
-button:hover {
+.button:hover {
   background-color: #F2F2F2;
   box-shadow: 0px 0px 20px -18px;
 }
 
-button:active {
+.button:active {
   transform: scale(0.95);
 }

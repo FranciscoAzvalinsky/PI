@@ -10,9 +10,10 @@
     margin-top: 3%;
     padding: 0px;
     margin-left: 40.5%;
-    background: rgb(85, 71, 25);
+    background: rgb(2, 0, 110);
     border-radius: 10px;
     border: 1px solid black;
+    color: white;
 }
 
 .divDetail div {
