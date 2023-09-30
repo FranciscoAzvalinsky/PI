@@ -85,7 +85,6 @@ function App({allDogs, loadDogs, loadTemperaments, loadedDogs, loadedDogsSwitch}
       <Routes>
         <Route path = '/' element = {<LandingPage/>}/>
         <Route path = '/home' element = {<Paginador home={true}/>}/>
-        <Route path = '/home/name' element = {<Paginador home={false}/>}/>
         <Route path = '/detail/:id' element = {<Detail/>}/>
         <Route path = '/createDog' element = {<Form createDog={createDog}/>}/>
       </Routes>

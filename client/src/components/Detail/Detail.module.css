@@ -4,14 +4,14 @@
     align-content: center;
     align-items: center;
     flex-wrap: wrap;
-    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: Quicksand;
     width: 360px;
     height: 660px;
     margin-top: 5%;
     margin-left: 40.5%;
-    background: rgb(2, 0, 110);
+    background: rgb(209, 170, 111);
     border-radius: 10px;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.3);
     color: white;
 }
 
@@ -28,6 +28,7 @@
 
 .img{
     margin-top: 15px;
-    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
     height: 200px;
 }

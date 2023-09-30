@@ -19,8 +19,8 @@ export default function Card ({image, name, temperament, temperaments, weight, i
             <div className={style.divCard}>
                 <img className={style.img} src={image} alt='FotoPerro'/>
                 <h3 className={style.text}>{name}</h3>
-                {temperaments ? <h3 className={style.text}>{mapeado}</h3> : <h3 className={style.text}>{temperament}</h3>}
-                <h3 className={style.text}>{weight}</h3>
+                {temperaments ? <h3 className={style.text} style={{fontWeight: 'normal', fontSize: '15px', padding: '2px'}} >{mapeado}</h3> : <h3 style={{fontWeight: 'normal', fontSize: '15px', padding: '0px'}} className={style.text}>{temperament}</h3>}
+                <h3 className={style.text} style={{fontWeight: 'light', fontSize: '15px'}}>Weight: {weight} kg</h3>
             </div>
         </Link>
     )

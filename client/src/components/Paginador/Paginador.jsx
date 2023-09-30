@@ -43,12 +43,12 @@ function Paginador ({dogs, currentPage, showing, nextHandler, prevHandler}) {
 
             return (
                 <div>
-                    <h3 className={style.h3}>Page {currentPage+1}</h3>
-                    <h3 className={style.h3}> 
+                    <h3 className={style.h3} style={{marginTop:'20px'}}>Page {currentPage+1}/{Math.floor(dogs.length/itemsPerPage)+1}</h3>
+                    <h3 className={style.h3} style={{marginTop:'-20px', marginBottom: '5px'}}> 
                         <div className={style.buttonDiv}>
-                            <Button text='Prev page' onClick={prev} marginRight='20px' ></Button>
+                            <Button text='e' onClick={prev} marginRight='20px' font='Arrow' rotate='180'></Button>
                             {dogs.length} results
-                            <Button text='Next page' onClick={next} marginLeft='20px' ></Button>
+                            <Button text='e' onClick={next} marginLeft='20px' font='Arrow'></Button>
                         </div>
                     </h3>
                     <ul className={style.FlexContainer}>{items}</ul>

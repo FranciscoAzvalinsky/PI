@@ -4,25 +4,37 @@
     align-content:center;
     align-items: center;
     flex-wrap: wrap;
+    margin-top: -5px;
     font-family: 'Open Sans Condensed', sans-serif;
-    width: 100%;
-    height: 60px;
-    background: rgb(2, 0, 110);
-    border-bottom: 1px solid black;
+    width: 99.92%;
+    height: 61px;
+    background: rgb(190, 153, 97);
+    border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .label{
+  font-family: Jambo;
   color: white;
   font-weight: lighter;
+  margin-top: 45px;
   font-size: 40px;
-  margin-left: 338px;
-  -webkit-text-stroke: 1px #000000;
+  margin-left: 267px;
+}
+
+.patita{
+  font-family: canDog;
+  color: rgb(196, 113, 20);
+  font-weight: lighter;
+  margin-top: 72px;
+  font-size: 65px;
+  margin-left: 10px;
 }
 
 .divSelect{
     display: flex;
     flex-direction: row;
-    margin-left: 17%;
+    margin-top: 6px;
+    margin-left: 17.8%;
     font-family: 'Open Sans Condensed', sans-serif;
 }
 
@@ -33,10 +45,36 @@
 }
 
 .li{
-  background: rgb(1, 0, 43);
+  font-family: Quicksand;
+  border-radius: 5px;
+  font-size: 16px;
+  background: rgb(196, 113, 20);
   color: white;
-  font-size: large;
   padding: 3px
+}
+
+
+.icon-wrapper {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  transform: scale(.9);
+  transition: .2s linear;
+}
+
+.icon path {
+  stroke: #000;
+  stroke-width: 2px;
+  -webkit-transition: .2s linear;
+  transition: .2s linear;
 }
 
 .ulTemps{

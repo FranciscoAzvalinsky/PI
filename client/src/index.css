@@ -6,12 +6,34 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /*background-image: url('../pexels-photo-7210754\ \(1\).jpeg');*/
-  background-image: url('../ZPoHDwJW_4x.jpg');
+  background-image: url('../cute-dogs-in-action-wallpaper-design-vector-26318997.jpg');
   background-repeat:repeat;
-  background-size: 88%;
-  background-position: center -106px;
+  background-size: 78%;
 }
 
+@font-face {
+  font-family: 'canDog';
+  src: url('./fonts/can\ dog\ tfb.ttf') format('truetype');
+  /* Otras propiedades de la fuente, como font-weight o font-style, si es necesario */
+}
+
+@font-face {
+  font-family: 'Jambo';
+  src: url('./fonts/DK\ Jambo.otf') format('opentype');
+  /* Otras propiedades de la fuente, como font-weight o font-style, si es necesario */
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  src: url('./fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
+  /* Otras propiedades de la fuente, como font-weight o font-style, si es necesario */
+}
+
+@font-face {
+  font-family: 'Arrow';
+  src: url('./fonts/Arrows\ tfb.ttf') format('truetype');
+  /* Otras propiedades de la fuente, como font-weight o font-style, si es necesario */
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

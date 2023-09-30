@@ -37,14 +37,14 @@ export default function Detail () {
             return (
                 <div className={style.divDetail}>
                     <img className={style.img} src={character.reference_image_id} alt='Foto del perro'></img>
-                    <p className={style.text}>{character.id}</p>
-                    <p className={style.text}>{character.name}</p>
-                    <p className={style.text}>{character.weight.metric}</p>
-                    <p className={style.text}>{character.height.metric}</p>
+                    <p className={style.text}  style={{fontSize: '14px'}}>Id: {character.id}</p>
+                    <p className={style.text} style={{fontSize: '20px', fontWeight: 'bold'}}>{character.name}</p>
+                    <p className={style.text}>Weigth: {character.weight.metric} kg</p>
+                    <p className={style.text}>Height: {character.height.metric} m</p>
                     {character.temperaments ? <p className={style.text}>{mapeado}</p> : <p className={style.text}>{character.temperament}</p>}
-                    <p className={style.text}>{character.life_span}</p> 
+                    <p className={style.text}>Lifespan: {character.life_span}</p> 
                     <Link to ='/home'>
-                        <Button type='button' text='Back to Home'></Button>
+                        <Button type='button' text='Back to Home' font='Quicksand'></Button>
                     </Link>
                 </div>
             )

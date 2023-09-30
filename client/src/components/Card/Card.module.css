@@ -7,21 +7,26 @@
     font-family: 'Open Sans Condensed', sans-serif;
     width: 360px;
     height: 425px;
-    margin-top: 0%;
-    background: rgb(2, 0, 110);
+    margin-top: 5.13%;
+    background: rgb(209, 170, 111);
     border-radius: 10px;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.divCard:hover{
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.92);
 }
 
 .text{
-    font-weight: lighter;
+    font-family: Quicksand;
     color: white;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .img{
     margin-top: 15px;
-    border: 1px solid rgb(0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
     height: 200px;
 }
 

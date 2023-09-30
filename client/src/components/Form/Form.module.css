@@ -10,9 +10,9 @@
     margin-top: 3%;
     padding: 0px;
     margin-left: 40.5%;
-    background: rgb(2, 0, 110);
+    background: rgb(209, 170, 111);
     border-radius: 10px;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.3);
     color: white;
 }
 
@@ -26,15 +26,25 @@
 }
 
 
+
+.title{
+    font-family: Jambo;
+    font-weight: lighter;
+    font-size: 23px;
+}
 .text{
-    font-weight: bold;
-    font-size: 18px;
+    font-family: Quicksand;
+    font-weight: normal;
+    font-size: 14px;
 }
 
 
 .imgPreview{
     height: 250px;
-    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .input{

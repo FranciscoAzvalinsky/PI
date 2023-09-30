@@ -3,7 +3,8 @@
     display: flex;
     align-items: center;
     font-size: 16px;
-    font-weight: bold;
+    font-family: Quicksand;
+    font-weight: normal;
     color: #ffffff;
     cursor: pointer;
     margin-right: 7px;
@@ -20,6 +21,7 @@
   .checkmark {
     position: relative;
     display: inline-block;
+    
     width: 20px;
     height: 20px;
     margin-right: 12px;

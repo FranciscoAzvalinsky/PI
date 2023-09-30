@@ -1,12 +1,14 @@
 .searchBar{
     display: flex;
     flex-direction: row;
+    margin-left: 20px;
 }
 
 .input {
     background-color: #eee;
     border: none;
     padding: 0px;
+    margin-left: 3px;
     font-size: 14px;
     width: 140px;
     border-radius: 1rem;
@@ -14,6 +16,41 @@
     box-shadow: 0 2px #dfd9d9;
     cursor: pointer;
   }
+
+  .search {
+    display: inline-block;
+    position: relative;
+    margin-top: 5px;
+  }
+  
+  .search input[type="text"] {
+    width: 200px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search button[type="submit"] {
+    background-color: rgb(196, 113, 20);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: .9s ease;
+  }
+  
+  .search button[type="submit"]:hover {
+    transform: scale(1.1);
+    color: rgb(255, 255, 255);
+    background-color: rgb(173, 99, 14);
+  }
+  
 
 
   .materialCheckbox {
