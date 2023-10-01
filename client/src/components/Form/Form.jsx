@@ -37,6 +37,7 @@ export default function Form ({createDog}) {
             heightMax : dogData.heightMax,
             life_span : dogData.life_span,
             temperament : dogData.temperament,
+            reference_image_id: dogData.reference_image_id
         }));
     }, []);
 
@@ -52,10 +53,19 @@ export default function Form ({createDog}) {
                 
             })
         }
-        setErrors(validation({
-            ...dogData,
-            [e.target.name] : e.target.value,
-        }));
+        if (e.target.name === 'reference_image_id'){
+            setErrors(validation({
+                ...dogData,
+                reference_image_id : dogData.reference_image_id,
+            }));
+        }
+        else {
+            setErrors(validation({
+                ...dogData,
+                [e.target.name] : e.target.value,
+            }));
+        }
+
     }
 
     useEffect(() => {
@@ -164,8 +174,8 @@ export default function Form ({createDog}) {
                 </div>
                 <div>
                     <label className={style.text} for="image">Image:</label>
-                    <input type='file' name='image' id='image' accept='image/*' onChange={handleImage}></input>
-                    {!dogData.reference_image_id && <p className={style.text} style={{color: 'red'}}>Image is required</p>}
+                    <input type='file' name='reference_image_id' id='image' accept='image/*' onChange={handleImage}></input>
+                    {!dogData.reference_image_id && <p className={style.text} style={{color: 'red'}}>{errors.reference_image_id}</p>}
                     {dogData.reference_image_id &&
                     <img id='image-preview' src={dogData.reference_image_id} alt='Vista previa' className={style.imgPreview}></img>}                
                 </div>

@@ -10,6 +10,7 @@ export default function validation(inputs){
       (!inputs.heightMax) ? errors.heightMax = 'Maximum height is required' : errors.heightMax = '';
       (!inputs.life_span) ? errors.life_span = 'Lifespan is required' : errors.life_span = '';
       (!inputs.temperament) ? errors.temperament = 'Temperaments are required' : errors.temperament = '';
+      (!inputs.reference_image_id) ? errors.reference_image_id = 'Image is required' : errors.reference_image_id = ''
 
 
 

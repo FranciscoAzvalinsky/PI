@@ -38,6 +38,11 @@
     font-family: 'Open Sans Condensed', sans-serif;
 }
 
+.select{
+  padding: 2px;
+  border-radius: 5px;
+}
+
 .divTemps{
   position: absolute;
   top: 50px;

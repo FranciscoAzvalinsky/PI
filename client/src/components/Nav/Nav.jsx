@@ -1,13 +1,16 @@
 import style from './Nav.module.css'
 import SearchBar from '../SearchBar/SearchBar';
 
-import { Link } from 'react-router-dom';
-import { connect, useDispatch } from "react-redux";
+import { Link, useLocation } from 'react-router-dom';
+import { connect, useDispatch  } from "react-redux";
 
 import { originOfDogs, filterTemperaments, orderByType, orderWay, order, resetFilter, loadFilterTemperaments, unreset, deleteFilterTemp } from '../../redux/actions';
 import Checkbox from '../Checkbox/Checkbox';
 import Button from '../Button/Button';
 function Nav ({SearchByName, temperaments, filteredTemperaments}) {
+
+    let location = useLocation();
+    console.log(location.pathname)
 
     let items = [];
 
@@ -61,7 +64,9 @@ function Nav ({SearchByName, temperaments, filteredTemperaments}) {
     }
 
     return (
-        <div className={style.divDiv}>
+        <div>
+            {location.pathname === '/home' && 
+            <div className={style.divDiv}>
             <SearchBar SearchByName={SearchByName}></SearchBar>
             <Link to='/createDog'>
                 <Button text="Create your own dog's race!" marginLeft='50px' font='Quicksand'></Button>
@@ -71,11 +76,11 @@ function Nav ({SearchByName, temperaments, filteredTemperaments}) {
             </h3>
             <h3 className={style.patita}>T</h3>
             <div className={style.divSelect}>
-                <select onChange={handlerOrigin}>
+                <select onChange={handlerOrigin} className={style.select}>
                     <option value='Api'>API</option>
                     <option value='Bdd'>BDD</option>                       
                 </select>
-                <select onChange={handlerTemperaments}>
+                <select onChange={handlerTemperaments} className={style.select}>
                     <option value='All temperaments'>All temperaments</option>
                     {items}
                 </select>
@@ -84,24 +89,33 @@ function Nav ({SearchByName, temperaments, filteredTemperaments}) {
                         {filteredTemperaments.map((temper, index) => (
                             <li className={style.li} key={index}>{temper} <button style={{borderRadius: '5px'}}onClick={() => handleDeleteElement(index)}>
                                 <span className={style.iconWrapper}>
-    <svg class="icon" width="18px" height="18px" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-    </svg>
-  </span>
+                                    <svg class="icon" width="18px" height="18px" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6 7V18C6 19.1046 6.89543 20 8 20H16C17.1046 20 18 19.1046 18 18V7M6 7H5M6 7H8M18 7H19M18 7H16M10 11V16M14 11V16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </span>
                                 </button></li>
                         ))}
                     </ul>
                 </div>
-                <select onChange={handlerType}>
+                <select onChange={handlerType} className={style.select}>
                     <option value='raza'>Race</option>
                     <option value='peso'>Weight</option>
                 </select>
-                <select onChange={handlerOrder}>
+                <select onChange={handlerOrder} className={style.select}>
                     <option value='A'>Ascending </option> 
                     <option value='D'>Descending</option>                                          
                 </select>
             <Checkbox text='Default values' onChange={reseter}></Checkbox>
             </div>
+            </div>            
+            }
+            {location.pathname === '/createDog' && 
+            <div className={style.divDiv}>
+                <h3 className={style.label} style={{marginLeft: '880px'}}>
+                    DOGS
+                </h3>
+                <h3 className={style.patita}>T</h3>
+             </div>}
             
         </div>
     )
