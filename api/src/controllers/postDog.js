@@ -1,9 +1,5 @@
-const axios = require('axios');
-const URL = 'https://api.thedogapi.com/v1/breeds/search?q='
-const { API_KEY } = process.env;
 const { Dog } = require('../db')
 const { Temperaments } = require('../db')
-const stringToArray = require('./stringToArray')
 
 
 const postDog = async (req, res) => {
@@ -11,10 +7,6 @@ const postDog = async (req, res) => {
         let dog = req.body;
         const race = await Dog.create(dog);
         let tempers = dog.temperament;
-        //tempers=stringToArray(tempers);
-        //console.log(tempers);
-
-
         tempers.forEach(async (temper) => {
             let iden = await Temperaments.findOne({where: {nombre: temper}});
             if (iden) {

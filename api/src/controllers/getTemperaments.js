@@ -3,8 +3,6 @@ const URL = 'https://api.thedogapi.com/v1/breeds'
 const { API_KEY } = process.env;
 const { Temperaments } = require('../db')
 const stringToArray = require('./stringToArray');
-//const orderArray = require('./orderArray');
-
 
 const getTemperaments = async (req, res) => {
     try {
@@ -21,7 +19,6 @@ const getTemperaments = async (req, res) => {
                 })
             }
         });
-        //temperaments=orderArray(temperaments);
         temperaments.forEach((temper) => {
             Temperaments.findOrCreate({where: {nombre: temper}});
         })

@@ -18,12 +18,13 @@ export const LOAD_FILTER_TEMPERAMENTS = 'load_filters_temperaments';
 export const UNRESET = 'unreset';
 
 
-export function firstRender(dogs, itemsPerPage){
+export function firstRender(dogs, itemsPerPage, currentPage){
     let fragment = [];
-    fragment = dogs.slice(0, itemsPerPage)
+
+    fragment = dogs.slice(currentPage*itemsPerPage, (currentPage+1)*itemsPerPage)
     return {
         type: FIRST_RENDER,
-        payload: {fragment: fragment, currentPage: 0}
+        payload: {fragment: fragment, currentPage: currentPage}
     }
 }
 

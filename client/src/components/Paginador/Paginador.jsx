@@ -13,7 +13,7 @@ function Paginador ({dogs, currentPage, showing, nextHandler, prevHandler}) {
     const dispatch = useDispatch()
   
     useEffect (() => {
-        dispatch(firstRender(dogs, itemsPerPage));
+        dispatch(firstRender(dogs, itemsPerPage, currentPage));
       }, [dogs])
 
       const prev = () => {

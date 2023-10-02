@@ -69,7 +69,7 @@ function Nav ({SearchByName, temperaments, filteredTemperaments}) {
             <div className={style.divDiv}>
             <SearchBar SearchByName={SearchByName}></SearchBar>
             <Link to='/createDog'>
-                <Button text="Create your own dog's race!" marginLeft='50px' font='Quicksand'></Button>
+                <Button text="Create your own dog's race!" font='Quicksand'></Button>
             </Link>
             <h3 className={style.label}>
                 DOGS

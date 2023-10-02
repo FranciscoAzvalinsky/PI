@@ -1,7 +1,6 @@
 const axios = require('axios');
 const URL = 'https://api.thedogapi.com/v1/breeds/search?q='
 const URL_2 = 'https://cdn2.thedogapi.com/images';
-const { API_KEY } = process.env;
 const { Dog } = require('../db')
 const { Op } = require('sequelize');
 
