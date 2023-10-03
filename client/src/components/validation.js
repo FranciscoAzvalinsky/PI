@@ -12,10 +12,7 @@ export default function validation(inputs){
       (!inputs.temperament) ? errors.temperament = 'Temperaments are required' : errors.temperament = '';
       (!inputs.reference_image_id) ? errors.reference_image_id = 'Image is required' : errors.reference_image_id = ''
 
-
-
-      console.log(inputs);
-
+      //funcion para chequear que word contenga solo letras minusculas o mayusculas (o espacios)
       const isWord = (word) => {
         let isWord = true;
         word.forEach((letter) => {

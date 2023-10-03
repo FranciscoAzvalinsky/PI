@@ -1,6 +1,6 @@
-import axios from 'axios';
 import validation from '../validation';
 import style from './Form.module.css';
+
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 
@@ -9,10 +9,13 @@ import PopUp from '../PopUp/PopUp';
 
 export default function Form ({createDog}) {
 
-
+    //estado para visualizar o no la pestaña de error
     const [popUp, setPopUp] = useState(false);
+
+    //estado para regular los errores de temperamentos
     const [firstLoad, setFirstLoad] = useState(false);
 
+    //estado que contiene la informacion del formulario
     const [dogData, setDogData]= useState({
         name: "",
         reference_image_id: '',
@@ -24,10 +27,13 @@ export default function Form ({createDog}) {
         temperament: [],
     });
 
+    //estado donde se introduce el temperamento del formulario, para luego ser pusheado a dogData con 'add'
     const [temperaments, setTemperaments]= useState('');
 
+    //estado donde se actualizan los errores del formulario
     const [errors, setErrors]= useState({});
 
+    //se renderizan los errores al cargar el componente
     useEffect (() => {
         setErrors(validation({
             name : dogData.name,
@@ -42,6 +48,7 @@ export default function Form ({createDog}) {
     }, []);
 
 
+    //handler para los cambios en los inputs, a su vez actualiza el error en tiempo real
     const handleChange = (e) => {
         if (e.target.name === 'temperament'){
            setTemperaments(e.target.value);
@@ -65,18 +72,28 @@ export default function Form ({createDog}) {
                 [e.target.name] : e.target.value,
             }));
         }
-
     }
 
+    //paso del temperamento de temperaments a dogData
+    const handleClick = (e) => {
+        if (temperaments.trim() !== ''){
+            setDogData({
+                ...dogData,
+                temperament: [...dogData.temperament, temperaments]
+            })
+            setTemperaments('');
+        }
+    }
+
+    //renderizado del error de temperaments al montar el componente
     useEffect(() => {
         handleChange({target: {name: 'temperament', value: null}})
         setFirstLoad(true)
     }, firstLoad)
 
+    //permite la carga y previsualizacion de la imagen
     const handleImage = (e) => {
         const file = e.target.files[0];
-        
-
         if (file && file.type.startsWith('image/')){
             const imageURL = URL.createObjectURL(file)
             setDogData({...dogData, reference_image_id: imageURL})
@@ -93,20 +110,11 @@ export default function Form ({createDog}) {
         }
     }
 
-    const handleClick = (e) => {
-        if (temperaments.trim() !== ''){
-            setDogData({
-                ...dogData,
-                temperament: [...dogData.temperament, temperaments]
-            })
-            setTemperaments('');
-        }
- 
-    }
 
+    //permite hacer submit del formulario si se encuentra sin errores, en caso de tener errores, muestra error y pide correccion
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!errors.name && !errors.weightMin && !errors.weightMax && !errors.heightMin && !errors.heightMax && !errors.life_span && !errors.temperament){
+        if (!errors.name && !errors.weightMin && !errors.weightMax && !errors.heightMin && !errors.heightMax && !errors.life_span && !errors.temperament && !errors.reference_image_id){
             await createDog(dogData);
             setDogData({
                 name: "",

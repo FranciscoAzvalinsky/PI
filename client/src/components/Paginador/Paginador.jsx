@@ -8,24 +8,31 @@ import { nextHandler, prevHandler, firstRender } from '../../redux/actions';
 
 function Paginador ({dogs, currentPage, showing, nextHandler, prevHandler}) {  
 
+
+    //variable para la renderizacion de x perros
     const itemsPerPage = 8;
 
     const dispatch = useDispatch()
   
+    //renderizado de perros al montar el componente
     useEffect (() => {
         dispatch(firstRender(dogs, itemsPerPage, currentPage));
       }, [dogs])
 
+
+      //handler para ir a la pagina previa
       const prev = () => {
         dispatch(prevHandler(dogs, itemsPerPage, currentPage))
       }
 
+      //handler para ir a la pagina siguiente
       const next = () => {
         dispatch(nextHandler(dogs, itemsPerPage, currentPage))
       }
 
     let items = [];
 
+    //mapeado de los perros "a mostrar" para retornar un item de lista que contenga la card del perro
         items = showing.map ((dog) => {
             return (
                     <li key={dog.id} className={style.FlexLi}>

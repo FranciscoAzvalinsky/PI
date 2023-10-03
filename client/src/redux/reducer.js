@@ -91,7 +91,6 @@ const reducer = (state = initialState, action) => {
             }
 
         case ORIGIN_OF_DOGS:
-            console.log(action)
             if (action.payload === 'Api'){
                 return {
                     ...state,
@@ -110,7 +109,6 @@ const reducer = (state = initialState, action) => {
             break;
 
         case LOAD_FILTER_TEMPERAMENTS:
-
             if (action.payload !== 'All temperaments'){
                 return {
                     ...state,
@@ -122,7 +120,6 @@ const reducer = (state = initialState, action) => {
                     ...state
                 }
             }
-         
         
         case FILTER_TEMPERAMENTS:
             if (state.filteredTemperaments[0] !=='All temperaments' && state.filteredTemperaments[0] ){
@@ -217,7 +214,6 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 filteredTemperaments: action.payload.filteredTemperaments
             }
-
 
         case RESET_NAME:
             return {

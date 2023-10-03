@@ -17,7 +17,7 @@ export const RESET_NAME = 'reset_name';
 export const LOAD_FILTER_TEMPERAMENTS = 'load_filters_temperaments';
 export const UNRESET = 'unreset';
 
-
+//action para renderizar al montar el componente
 export function firstRender(dogs, itemsPerPage, currentPage){
     let fragment = [];
 
@@ -28,6 +28,7 @@ export function firstRender(dogs, itemsPerPage, currentPage){
     }
 }
 
+//carga de nombre de searchBar en el estado
 export function loadName(name){
     return {
         type: LOAD_NAME,
@@ -35,6 +36,7 @@ export function loadName(name){
     }
 }
 
+//busqueda de perros que contengan dicho nombre
 export function loadNamed(){
     return {
         type: LOAD_NAMED,
@@ -42,6 +44,7 @@ export function loadNamed(){
     }
 }
 
+//carga de perros en el estado
 export function loadDogs(dogs){
     return{
         type: LOAD_DOGS,
@@ -49,6 +52,7 @@ export function loadDogs(dogs){
     }
 }
 
+//avisa cuando se cargo un perro nuevo
 export function loadedDogs(){
     return{
         type: LOADED_DOGS,
@@ -56,6 +60,7 @@ export function loadedDogs(){
     }
 }
 
+//carga de temperamentos en el estado
 export function loadTemperaments(temperaments){
     return{
         type: LOAD_TEMPERAMENTS,
@@ -63,6 +68,7 @@ export function loadTemperaments(temperaments){
     }
 }
 
+//permite cambiar a la pagina siguiente 
 export function nextHandler (dogs, itemsPerPage, currentPage) {
     const sigtPag = currentPage + 1;
     const total = dogs.length;
@@ -85,7 +91,7 @@ export function nextHandler (dogs, itemsPerPage, currentPage) {
     }
 }
 
-
+//permite cambiar a la pagina anterior
 export function prevHandler (dogs, itemsPerPage, currentPage) {
     const antPag = currentPage - 1;
     const index = antPag * itemsPerPage;
@@ -103,7 +109,7 @@ export function prevHandler (dogs, itemsPerPage, currentPage) {
     }
 }
 
-
+//modifica el estado de 'api' o 'bdd'
 export function originOfDogs(value) {
      return {
         type: ORIGIN_OF_DOGS,
@@ -111,12 +117,14 @@ export function originOfDogs(value) {
     }
 }
 
+//busca los perros que contengan los temperamentos seleccionados
 export function filterTemperaments(){
     return {
         type: FILTER_TEMPERAMENTS,
     }
 }
 
+//permite eliminar un temperamento de los seleccionados del filtro 
 export function deleteFilterTemp(index){
     return {
         type: DELETE_FILTER_TEMP,
@@ -124,6 +132,7 @@ export function deleteFilterTemp(index){
     }
 }
 
+//cambia el estado de orden por 'raza' o 'peso'
 export function orderByType(value){
     return {
         type: ORDER_BY_TYPE,
@@ -131,6 +140,7 @@ export function orderByType(value){
     }
 }
 
+//cambia el estado de orden 'ascendente' o 'descendente'
 export function orderWay(value){
     return {
         type: ORDER_WAY,
@@ -138,12 +148,14 @@ export function orderWay(value){
     }
 }
 
+//ordena segun los estados actuales
 export function order () {
     return {
         type: ORDER
     }
 }
 
+//vuelve los estados de ordenamientos a su version default
 export function resetFilter(){
     return {
         type: RESET_FILTER,
@@ -155,6 +167,8 @@ export function resetFilter(){
     }
 }
 
+
+//elimina el nombre introducido en la searchBar
 export function resetName(){
     return {
         type: RESET_NAME,
@@ -162,6 +176,7 @@ export function resetName(){
     }
 }
 
+//elimina 'All temperaments' del filtrado
 export function unreset(){
     return {
         type: UNRESET,
@@ -171,6 +186,7 @@ export function unreset(){
     }
 }
 
+//agrega el temperamento elegido a los temperamentos a filtrar
 export function loadFilterTemperaments(value){
     return {
         type: LOAD_FILTER_TEMPERAMENTS,

@@ -4,16 +4,18 @@ import SearchBar from '../SearchBar/SearchBar';
 import { Link, useLocation } from 'react-router-dom';
 import { connect, useDispatch  } from "react-redux";
 
-import { originOfDogs, filterTemperaments, orderByType, orderWay, order, resetFilter, loadFilterTemperaments, unreset, deleteFilterTemp } from '../../redux/actions';
 import Checkbox from '../Checkbox/Checkbox';
 import Button from '../Button/Button';
+
+import { originOfDogs, filterTemperaments, orderByType, orderWay, order, resetFilter, loadFilterTemperaments, unreset, deleteFilterTemp } from '../../redux/actions';
+
 function Nav ({SearchByName, temperaments, filteredTemperaments}) {
 
     let location = useLocation();
-    console.log(location.pathname)
 
     let items = [];
 
+    //mapeo de los temperamentos del estado de redux para su display en el select
     items = temperaments.map ((temper) => {
         return (
                 <option value={temper}>{temper}</option>
@@ -22,28 +24,34 @@ function Nav ({SearchByName, temperaments, filteredTemperaments}) {
 
     const dispatch = useDispatch();
 
+    //handler que permite cambiar entre api y bdd
     const handlerOrigin = (e) => {
         dispatch(originOfDogs(e.target.value));
         dispatch(order())
     }
 
+
+    //handler que permite filtrar por temperamentos
     const handlerTemperaments = (e) => {
         dispatch(loadFilterTemperaments(e.target.value))
         dispatch(filterTemperaments());
         dispatch(order())
     }
 
+    //handler que permite ordenar por peso o raza
     const handlerType = (e) => {
         dispatch(orderByType(e.target.value));
         dispatch(order())
 
     }
 
+    //handler que permite ordenar ascendentemente o descendentemente
     const handlerOrder = (e) => {
         dispatch(orderWay(e.target.value));
         dispatch(order())
     }
 
+    //funcion para resetear los filtros y mostrar el orden default
     const reseter = (e) => {
         if (e.target.checked) {
             dispatch(resetFilter())
@@ -57,6 +65,7 @@ function Nav ({SearchByName, temperaments, filteredTemperaments}) {
         }
     }
 
+    //elminar un temperamento del listado del filtrado
     const handleDeleteElement = (index) => {
         dispatch(deleteFilterTemp(index))
         dispatch(filterTemperaments());

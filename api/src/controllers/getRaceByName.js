@@ -6,8 +6,12 @@ const { Op } = require('sequelize');
 
 
 const getRaceByName = async (req, res) => {
+
+    //se extrae el name del query
     let { name } = req.query;
+    
     try {
+        //busca en la base de datos perros que contengan ese nombre
         let response2 = Dog.findAll({
             where: {
                 name: {
@@ -15,25 +19,24 @@ const getRaceByName = async (req, res) => {
                 }
             }
         })
-        if (response2.data) {
-            res.status(201).json(response2.data);
-        } else {
-            let { data } = await axios(`${URL}${name}`)
-            if (data) {
-                data.forEach( dog => {
-                    if (dog.id === 15 || dog.id === 125 || dog.id === 212) {
-                        extension = 'png';
-                    } else {
-                        extension = 'jpg';
-                    }
-                    dog.reference_image_id = `${URL_2}/${dog.reference_image_id}.${extension}`
-                })
-                res.status(200).json(data);
-            }
-            else {
-                res.status(403).json('No se ha encontrado ninguna raza con ese nombre')
-            }
+        let { data } = await axios(`${URL}${name}`)
+        //busca en la api perros que contengan ese nombre
+        if (data) {
+             data.forEach( dog => {
+                if (dog.id === 15 || dog.id === 125 || dog.id === 212) {
+                    extension = 'png';
+                } else {
+                    extension = 'jpg';
+                }
+                 dog.reference_image_id = `${URL_2}/${dog.reference_image_id}.${extension}`
+            })
+            //envia la union de ambas busquedas
+            res.status(200).json(data.concat(response2.data));
         }
+        else {
+            res.status(403).json('No se ha encontrado ninguna raza con ese nombre')
+        }
+        
     } catch (error) {
         console.log(error);
         res.status(500).json('Error: ' + error.message)

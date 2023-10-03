@@ -2,6 +2,8 @@ import style from './Card.module.css'
 import { Link } from 'react-router-dom';
 
 export default function Card ({image, name, temperament, temperaments, weight, id}) {
+
+    //artilugio para renderizado de temperamentos de perros traidos de bdd
     let mapeado = [];
     if (temperaments) {
         for (let i = 0; i< temperaments.length; i++) {

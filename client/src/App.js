@@ -1,18 +1,21 @@
 import './App.css';
 
+
+//import de hooks y funciones
 import { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { connect, useDispatch } from "react-redux";
 
+//import de componentes
 import LandingPage from './components/LandingPage/LandingPage';
 import Nav from './components/Nav/Nav';
 import Paginador from './components/Paginador/Paginador';
 import Detail from './components/Detail/Detail';
 import Form from  './components/Form/Form';
-import PopUp from './components/PopUp/PopUp';
 
 import axios from 'axios';
 
+//import de actions
 import { loadDogs, loadNamed, loadTemperaments, loadedDogs } from './redux/actions';
 
 function App({allDogs, loadDogs, loadTemperaments, loadedDogs, loadedDogsSwitch}) {
@@ -20,6 +23,8 @@ function App({allDogs, loadDogs, loadTemperaments, loadedDogs, loadedDogsSwitch}
   let location = useLocation();
   const dispatch = useDispatch();
 
+
+  //render de dogs al montar el componente y al cargar un nuevo perro
   useEffect (() => {
     const cargarDogs = async () => {
       try {
@@ -38,6 +43,7 @@ function App({allDogs, loadDogs, loadTemperaments, loadedDogs, loadedDogsSwitch}
    
   }, [loadedDogsSwitch])
 
+  //carga de temperamentos al estado, para utilizarlos en los filtrados
   useEffect(() => {
     const cargarTemperaments = async () => {
       try{
@@ -55,10 +61,14 @@ function App({allDogs, loadDogs, loadTemperaments, loadedDogs, loadedDogsSwitch}
     cargarTemperaments();
   }, [])
 
+
+  //funcion de busqueda de la SearchBar
   const SearchByName = async () => {
     dispatch(loadNamed())
  }
 
+
+ //funcion de creacion de un perro por formulario
  const createDog = async (dogReceived) => {
   let dogSend = {
     id: allDogs.length+93,
@@ -92,6 +102,8 @@ function App({allDogs, loadDogs, loadTemperaments, loadedDogs, loadedDogsSwitch}
   );
 }
 
+
+//traida de distintas variables y funciones de redux
 const mapStateToProps = (state) => {
   return {
      dogs: state.dogs,

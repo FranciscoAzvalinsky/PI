@@ -1,3 +1,4 @@
+//convierte los temperamentos en array, eliminando tambien los espacios en medio
 const stringToArray = (razas) => {
     let array = []
     array = razas.split(',')

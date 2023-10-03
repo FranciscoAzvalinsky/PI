@@ -7,8 +7,11 @@ const { Dog, Temperaments } = require('../db')
 const getRaces = async (req, res) => {
     try {
         let extension
+        //trae todos los perros de la api
         let { data } = await axios(`${URL}?api_key=${API_KEY}`);
+        //trae todos los perros de la base de datos
         let data1 = await Dog.findAll({
+            //incluye los temperamentos a traves de la tabla intermedia
             include: [
                 {
                     model: Temperaments,
@@ -19,8 +22,11 @@ const getRaces = async (req, res) => {
                 }
             ]
         });
+
+        //concatena ambos resultados
         data=data.concat(data1);
         if (data) {
+            //artilugio para la extension de la imagen de los perros de la api
             data.forEach( dog => {
                 if (dog.id === 15 || dog.id === 125 || dog.id === 212) {
                     extension = 'png';

@@ -8,20 +8,25 @@ import { loadName, resetName, order } from '../../redux/actions';
 
 
 
-function SearchBar({SearchByName, dogsName}) {
+function SearchBar({SearchByName}) {
     const dispatch = useDispatch()
  
+
+    //handler que modifica el estado que contiene el nombre que se desea buscar
     const handleChange = (e) => {
       dispatch(loadName(e.target.value))
     }
  
+    //handler para ejecutar la funcion de busqueda
     const handleSearch = async () => {
       await SearchByName();
     }
 
+    //funcion para el limpiado de la busqueda y mostrar el orden previo
     const clearInput = (e) => {
       dispatch(resetName());
       handleSearch();
+      order();
     }
 
     return (

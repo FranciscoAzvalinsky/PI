@@ -1,5 +1,6 @@
 import axios from 'axios';
 import style from './Detail.module.css';
+
 import { Link, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 
@@ -9,6 +10,7 @@ export default function Detail () {
     const { id } = useParams()
     const [character, setCharacter] = useState({});
 
+    //pedido de la data para el renderizado
      useEffect(() => {
         axios(`http://localhost:3001/dogs/${id}`).then(
             ({data}) => {
@@ -21,6 +23,8 @@ export default function Detail () {
               return setCharacter({});
            }, [id]);
 
+
+           //artilugio para renderizar los temperamentos de los perros traidos de bdd
            let mapeado = [];
            if (character.temperaments){
                 for (let i = 0; i< character.temperaments.length; i++) {
