@@ -114,7 +114,7 @@ export default function Form ({createDog}) {
     //permite hacer submit del formulario si se encuentra sin errores, en caso de tener errores, muestra error y pide correccion
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!errors.name && !errors.weightMin && !errors.weightMax && !errors.heightMin && !errors.heightMax && !errors.life_span && !errors.temperament && !errors.reference_image_id){
+        if (!errors.name && !errors.weightMin && !errors.weightMax && !errors.heightMin && !errors.heightMax && !errors.life_span && !errors.temperament){
             await createDog(dogData);
             setDogData({
                 name: "",

@@ -131,7 +131,6 @@ function Nav ({SearchByName, temperaments, filteredTemperaments}) {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
        showing: state.showing,
        temperaments: state.temperaments,

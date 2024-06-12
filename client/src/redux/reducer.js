@@ -52,7 +52,9 @@ const reducer = (state = initialState, action) => {
 
         case LOAD_NAMED:
             let namedDogs = [...state.allDogs].filter((dog) => {
-                return dog.name.includes(state.dogsName)
+                let dog1 = dog.name.toLowerCase();
+                let dog2= state.dogsName.toLowerCase();
+                return dog1.includes(dog2)
             })
             return {
                 ...state,
@@ -171,7 +173,7 @@ const reducer = (state = initialState, action) => {
             if (state.orderType === 'peso'){
                 for (let i=0; i<filteredDogs.length-1; i++) {
                     for (let j=0; j<filteredDogs.length-1; j++) {
-                        if ((parseFloat(filteredDogs[j].weight.metric.slice(0,2)) > parseFloat(filteredDogs[j+1].weight.metric.slice(0,2)) && state.orderWay==='A') || (parseFloat(filteredDogs[j].weight.metric.slice(0,2)) < parseFloat(filteredDogs[j+1].weight.metric.slice(0,2)) && state.orderWay==='D')){
+                        if ((parseFloat(filteredDogs[j].weight.metric.slice(2,-1)) > parseFloat(filteredDogs[j+1].weight.metric.slice(2,-1)) && state.orderWay==='A') || (parseFloat(filteredDogs[j].weight.metric.slice(2,-1)) < parseFloat(filteredDogs[j+1].weight.metric.slice(2,-1)) && state.orderWay==='D')){
                             aux= filteredDogs[j];
                             filteredDogs[j]= filteredDogs[j+1];
                             filteredDogs[j+1]= aux;
